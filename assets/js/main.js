@@ -19,6 +19,10 @@
     calendlyChat: "https://calendly.com/schuggies-ceilidhs/ceilidh-chat-how-a-ceilidh-will-work-for-your-wedding",
     calendlyAvail: "https://calendly.com/schuggies-ceilidhs/private-ceilidh-check-if-im-available-for-your-big-day",
     address: "Suite 69, Sneinton Market Unit 6, Gedling Street, Nottingham, NG1 1DS",
+    // PLACEHOLDER — client has not supplied their Amazon Associates link yet.
+    // Paste the storefront URL (with the ?tag=... affiliate ID) here and the
+    // disclosure blocks will render a real link instead of "coming soon".
+    amazonAffiliate: "",
     social: {
       facebook:  "https://www.facebook.com/WeddingCeilidhs/",
       instagram: "https://www.instagram.com/Schuggies_Ceilidhs/",

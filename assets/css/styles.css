@@ -1121,3 +1121,19 @@ body.no-scroll { overflow: hidden; }
 .prose h2:first-child { margin-top: 0; }
 .prose p { margin: 0 0 1.1rem; line-height: 1.72; }
 .prose > .check-list { margin-bottom: 1.4rem; }
+
+/* --- Amazon affiliate disclosure (FTC / ASA required wherever affiliate
+   links appear). Quiet by design: this is a legal notice, not a promo. --- */
+.affiliate {
+  border: 1px solid var(--line); border-left: 4px solid var(--sage);
+  border-radius: var(--radius); background: var(--paper);
+  padding: clamp(1.1rem, 3vw, 1.6rem) clamp(1.1rem, 3vw, 1.8rem);
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+.affiliate h2 {
+  font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--green-deep); margin: 0 0 .6rem;
+}
+.affiliate p { margin: 0 0 .5rem; font-size: .92rem; line-height: 1.6; color: var(--ink-soft); }
+.affiliate p:last-child { margin-bottom: 0; }
+.affiliate a { text-decoration: underline; }
