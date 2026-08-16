@@ -161,20 +161,24 @@
     var col2 = EXPLORE.map(function(n){return '<li><a href="'+base+n.href+'">'+n.label+'</a></li>';}).join("");
     // "More info" list — mirrors the old site. External items open in a new tab;
     // pages not yet built in this clone point at the live site so links always work.
-    var LIVE = "https://schuggies-ceilidhs.co.uk/";
+    // Every item is now a local page. Only Calendly stays external — it is a
+    // third-party booking service, not content we host. Nothing in the footer
+    // depends on schuggies-ceilidhs.co.uk staying up any more.
     var MOREINFO = [
-      { label: "How Much Does It Cost?", href: base + "pages/prices.html" },
-      { label: "Availability",          href: SITE.calendlyAvail, ext: true },
+      { label: "How Much Does It Cost?",   href: base + "pages/prices.html" },
+      { label: "Availability",             href: SITE.calendlyAvail, ext: true },
       { label: "About Schuggies-Ceilidhs", href: base + "pages/about.html" },
-      { label: "Corporate",             href: base + "pages/corporate.html" },
-      { label: "Book a Chat",           href: SITE.calendlyChat, ext: true },
-      { label: "FAQs",                  href: base + "pages/faqs.html" },
-      { label: "Testimonials",          href: "https://www.pinterest.co.uk/SchuggiesCeilidhs/schuggies-testimonials-reviews-and-endorsements/", ext: true },
-      { label: "Blogs",                 href: LIVE + "blog-posts-for-wedding-and-party-inspiration/", ext: true },
-      { label: "Free Guides & Resources", href: LIVE + "free-guides-and-resources/", ext: true },
-      { label: "Nottingham Ceilidh Club", href: LIVE + "nottingham-ceilidh-club/", ext: true },
-      { label: "Diversity & Enrichment", href: LIVE + "diversity-equity-and-inclusion/", ext: true },
-      { label: "Ceilidh Quick Links",   href: LIVE + "ceilidh-quick-links/", ext: true }
+      { label: "Corporate",                href: base + "pages/corporate.html" },
+      { label: "Book a Chat",              href: SITE.calendlyChat, ext: true },
+      { label: "FAQs",                     href: base + "pages/faqs.html" },
+      { label: "Testimonials",             href: base + "pages/testimonials.html" },
+      { label: "Blogs",                    href: base + "pages/blogs.html" },
+      { label: "Free Guides & Resources",  href: base + "pages/guides.html" },
+      // The Nottingham Ceilidh Club content was built as public-ceilidhs.html
+      // during the migration — this points there rather than duplicating it.
+      { label: "Nottingham Ceilidh Club",  href: base + "pages/public-ceilidhs.html" },
+      { label: "Diversity & Enrichment",   href: base + "pages/diversity-enrichment.html" },
+      { label: "Ceilidh Quick Links",      href: base + "pages/ceilidh-quick-links.html" }
     ];
     var col3 = MOREINFO.map(function(n){
       var t = n.ext ? ' target="_blank" rel="noopener"' : '';

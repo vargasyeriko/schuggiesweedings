@@ -1108,3 +1108,10 @@ body.no-scroll { overflow: hidden; }
   }
   .statement-bleed__text em { color: var(--sage); }
 }
+
+/* Link list — used by the blog index. Generous row height so every entry is a
+   comfortable tap target on a phone. */
+.link-list { list-style: none; margin: var(--sp-lg) 0 0; padding: 0; display: grid; }
+.link-list li + li { border-top: 1px solid var(--line); }
+.link-list a { display: block; padding: .9rem .2rem; min-height: 44px; color: var(--ink); line-height: 1.45; }
+.link-list a:hover { color: var(--burgundy); text-decoration: none; padding-left: .5rem; transition: padding .25s var(--ease-lux), color .2s; }
