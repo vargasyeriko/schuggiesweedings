@@ -22,8 +22,8 @@
       instagram: "https://www.instagram.com/Schuggies_Ceilidhs/",
       tiktok:    "https://www.tiktok.com/@schuggiesceilidhs",
       youtube:   "https://www.youtube.com/channel/UCrAF5cdLe0dLjdR9uneOGsA",
-      pinterest: "https://www.pinterest.co.uk/SchuggiesCeilidhs/",
-      twitter:   "https://twitter.com/CeilidhsUK",
+      pinterest: "https://uk.pinterest.com/SchuggiesCeilidhs/",
+      twitter:   "https://x.com/CeilidhsUK",
       linkedin:  "https://www.linkedin.com/in/schuggies-ceilidhsschuggie-the-ceilidh-caller-11a905184/"
     }
   };
@@ -64,14 +64,24 @@
     ig:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8.9A3.1 3.1 0 1 0 15.1 12 3.1 3.1 0 0 0 12 8.9zm0 5.1A2 2 0 1 1 14 12a2 2 0 0 1-2 2zm4-5.2a.7.7 0 1 1-.7-.7.7.7 0 0 1 .7.7zM19 8a4 4 0 0 0-1.1-2.8A4 4 0 0 0 15 4c-1.1-.1-4.3-.1-5.4 0A4 4 0 0 0 6.8 5.2 4 4 0 0 0 5.7 8c-.1 1.1-.1 4.3 0 5.4A4 4 0 0 0 6.8 16.2 4 4 0 0 0 9 17.3c1.1.1 4.3.1 5.4 0a4 4 0 0 0 2.8-1.1 4 4 0 0 0 1.1-2.8c.1-1.1.1-4.3 0-5.4zm-1.3 6.6a2 2 0 0 1-1.1 1.1c-.8.3-2.6.2-3.5.2s-2.7.1-3.5-.2a2 2 0 0 1-1.1-1.1c-.3-.8-.2-2.6-.2-3.5s-.1-2.7.2-3.5A2 2 0 0 1 8.5 6.9c.8-.3 2.6-.2 3.5-.2s2.7-.1 3.5.2a2 2 0 0 1 1.1 1.1c.3.8.2 2.6.2 3.5s.1 2.7-.2 3.5z"/></svg>',
     tt:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3h-2.6v11.3a2.2 2.2 0 1 1-1.9-2.2V9.4a5 5 0 1 0 4.5 5V8.5a6 6 0 0 0 3.5 1.1V7a3.5 3.5 0 0 1-3.5-3.5z"/></svg>',
     yt:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 8s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C16 5 12 5 12 5s-4 0-6.8.2c-.4 0-1.3 0-2 .9-.6.6-.8 2-.8 2S2.2 9.6 2.2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.7.8 1.7.8 2.1.9C7 19 12 19 12 19s4 0 6.8-.2c.4 0 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C21.8 9.6 21.6 8 21.6 8zM10 14.6V9.4l4.2 2.6z"/></svg>',
-    pin:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-3.3 17.4c-.1-.7-.1-1.9 0-2.7l1-4.4s-.3-.5-.3-1.3c0-1.2.7-2.1 1.6-2.1.7 0 1.1.6 1.1 1.2 0 .8-.5 1.9-.7 3-.2.9.4 1.6 1.3 1.6 1.6 0 2.7-2 2.7-4.4 0-1.8-1.2-3.2-3.5-3.2A4 4 0 0 0 7.6 12c0 .8.3 1.4.6 1.8.1.2.2.3.1.5l-.2.9c-.1.3-.2.4-.5.2-1.1-.5-1.7-1.9-1.7-3.1 0-2.5 1.9-4.9 5.4-4.9 2.9 0 5 2 5 4.8 0 2.9-1.8 5.2-4.3 5.2-.8 0-1.6-.4-1.9-1l-.5 2c-.2.7-.7 1.6-1 2.2A9 9 0 1 0 12 3z"/></svg>'
+    pin:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-3.3 17.4c-.1-.7-.1-1.9 0-2.7l1-4.4s-.3-.5-.3-1.3c0-1.2.7-2.1 1.6-2.1.7 0 1.1.6 1.1 1.2 0 .8-.5 1.9-.7 3-.2.9.4 1.6 1.3 1.6 1.6 0 2.7-2 2.7-4.4 0-1.8-1.2-3.2-3.5-3.2A4 4 0 0 0 7.6 12c0 .8.3 1.4.6 1.8.1.2.2.3.1.5l-.2.9c-.1.3-.2.4-.5.2-1.1-.5-1.7-1.9-1.7-3.1 0-2.5 1.9-4.9 5.4-4.9 2.9 0 5 2 5 4.8 0 2.9-1.8 5.2-4.3 5.2-.8 0-1.6-.4-1.9-1l-.5 2c-.2.7-.7 1.6-1 2.2A9 9 0 1 0 12 3z"/></svg>',
+    tw:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.1l-6.8 7.7L21.8 21h-6.2l-4.9-6.4L5.1 21H2l7.2-8.2L2.4 3h6.4l4.4 5.8L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg>',
+    li:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5v10.6H3.6V8.5h3.3zM5.3 3.4c1 0 1.8.8 1.8 1.8s-.8 1.8-1.8 1.8S3.5 6.2 3.5 5.2s.8-1.8 1.8-1.8zM9 8.5h3.1v1.4h.1c.5-.9 1.7-1.7 3.3-1.7 3.4 0 4.1 2.1 4.1 5v5.9h-3.3v-5.2c0-1.3 0-2.9-1.9-2.9s-2.1 1.4-2.1 2.8v5.3H9V8.5z"/></svg>'
   };
 
+  // Every platform in SITE.social must appear here, or it is configured and
+  // silently never rendered — which is what had happened to Twitter/X and
+  // LinkedIn. To hide one, blank its URL in SITE.social; the loop skips it.
   function socialLinks() {
     var s = SITE.social, out = "";
-    var map = [["facebook","fb"],["instagram","ig"],["tiktok","tt"],["youtube","yt"],["pinterest","pin"]];
+    var map = [["facebook","fb"],["instagram","ig"],["tiktok","tt"],["youtube","yt"],
+               ["pinterest","pin"],["twitter","tw"],["linkedin","li"]];
+    var LABEL = { twitter: "X (Twitter)" };
     map.forEach(function (m) {
-      if (s[m[0]]) out += '<a href="'+s[m[0]]+'" target="_blank" rel="noopener" aria-label="'+m[0]+'">'+ICON[m[1]]+'</a>';
+      var url = s[m[0]];
+      if (!url || !ICON[m[1]]) return;
+      var label = LABEL[m[0]] || m[0].charAt(0).toUpperCase() + m[0].slice(1);
+      out += '<a href="'+url+'" target="_blank" rel="noopener" aria-label="'+label+'">'+ICON[m[1]]+'</a>';
     });
     return out;
   }
