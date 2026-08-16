@@ -23,6 +23,11 @@
     // Paste the storefront URL (with the ?tag=... affiliate ID) here and the
     // disclosure blocks will render a real link instead of "coming soon".
     amazonAffiliate: "",
+    // PLACEHOLDER — no newsletter provider chosen yet. While this is empty the
+    // footer shows a mailto fallback that works today. Paste the provider's
+    // form action URL here (Mailchimp / ConvertKit / Brevo) and the real signup
+    // form replaces it sitewide. See data_in/newsletter/newsletter-plan.md
+    newsletterAction: "",
     social: {
       facebook:  "https://www.facebook.com/WeddingCeilidhs/",
       instagram: "https://www.instagram.com/Schuggies_Ceilidhs/",
@@ -154,6 +159,50 @@
     return b;
   }
 
+  // ---------- Newsletter ----------
+  // Renders in the footer, so it appears on every page.
+  // No provider is configured yet (SITE.newsletterAction is ""), so instead of
+  // a form that silently posts nowhere, it falls back to a pre-filled mailto —
+  // that actually works today. Paste the provider's action URL into
+  // SITE.newsletterAction and the real form takes over, no other edits.
+  function newsletterForm() {
+    var head = '<h4>Subscribe to updates</h4>' +
+      '<p class="nl-note">Monthly ceilidh dates, planning tips and free resources. No spam, ever.</p>';
+
+    if (!SITE.newsletterAction) {
+      var subj = encodeURIComponent("Add me to the ceilidh newsletter");
+      var body = encodeURIComponent("Hi Schuggie,\n\nPlease add me to your newsletter.\n\nThanks!");
+      return head +
+        '<a class="btn btn--chat btn--block nl-cta" href="mailto:' + SITE.email +
+          '?subject=' + subj + '&body=' + body + '">Subscribe by email</a>' +
+        '<p class="nl-consent">You can unsubscribe at any time. See our ' +
+          '<a href="' + base + 'pages/privacy.html">Privacy Policy</a>.</p>';
+    }
+
+    return head +
+      '<form class="nl-form" action="' + SITE.newsletterAction + '" method="post" target="_blank" novalidate>' +
+        '<label class="nl-label" for="nl-email">Email address</label>' +
+        '<input id="nl-email" name="EMAIL" type="email" required autocomplete="email" placeholder="Enter your email">' +
+        '<button class="btn btn--chat btn--block" type="submit">Subscribe</button>' +
+      '</form>' +
+      '<p class="nl-consent">You can unsubscribe at any time. See our ' +
+        '<a href="' + base + 'pages/privacy.html">Privacy Policy</a>.</p>';
+  }
+
+  // ---------- Affiliate disclosure ----------
+  // Required (FTC / UK ASA) wherever affiliate links appear. Sitewide in the
+  // footer is the safe placement — the Wedding Toolkit and blog posts carry
+  // Amazon links, and a disclosure buried on one page is easy to miss.
+  function affiliateNote() {
+    var link = SITE.amazonAffiliate
+      ? ' <a href="' + SITE.amazonAffiliate + '" target="_blank" rel="noopener sponsored">See my Amazon picks</a>.'
+      : '';
+    return '<div class="footer-affiliate">' +
+      '<p><b>Affiliate disclosure.</b> As an Amazon Associate, I earn from qualifying ' +
+      'purchases. Some links on this site may be affiliate links, at no extra cost to you.' + link + '</p>' +
+      '</div>';
+  }
+
   // ---------- Footer ----------
   function buildFooter() {
     // Explicit list rather than a NAV slice: NAV now contains an external
@@ -213,9 +262,11 @@
           '<li><a href="mailto:'+SITE.email+'">'+SITE.email+'</a></li>' +
           '<li>'+SITE.address+'</li>' +
         '</ul>' +
-        '<a class="btn btn--sage" class="u-mt-2" href="'+SITE.calendlyAvail+'" target="_blank" rel="noopener">Check Availability</a>' +
+        '<a class="btn btn--sage u-mt-2" href="'+SITE.calendlyAvail+'" target="_blank" rel="noopener">Check Availability</a>' +
         '</div>' +
+        '<div>' + newsletterForm() + '</div>' +
       '</div>' +
+      affiliateNote() +
       '<div class="footer-bottom">' +
         '<span>© '+ (new Date().getFullYear()) +' Schuggies-Ceilidhs Limited · Company No. 12395804</span>' +
         '<span><a href="'+base+'pages/privacy.html">Privacy</a> · <a href="'+base+'pages/terms.html">Terms</a></span>' +
