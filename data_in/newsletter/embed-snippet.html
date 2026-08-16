@@ -1,0 +1,19 @@
+<!--
+  PLACEHOLDER — paste the provider's RAW embed form here, unmodified,
+  before adapting it for buildFooter().
+
+  Why keep the original: providers include hidden fields (list IDs, bot
+  honeypots, timestamps) that are easy to drop by accident when restyling.
+  If the form silently stops delivering later, diff the live version against
+  this file first.
+
+  Adaptation checklist when moving it into assets/js/main.js:
+    [ ] keep every hidden input and the exact `action` URL
+    [ ] keep any honeypot field (usually an off-screen text input) — removing
+        it lets bots flood the list
+    [ ] swap provider CSS classes for .nl-* (see newsletter-plan.md §5)
+    [ ] add <label for> — providers often ship placeholder-only inputs, which
+        fail accessibility
+    [ ] input min-height 44px, autocomplete="email"
+    [ ] escape single quotes: buildFooter() builds HTML inside '...' strings
+-->
