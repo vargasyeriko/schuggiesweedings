@@ -13,7 +13,9 @@
     phone: "01332 498839",
     phoneHref: "tel:01332498839",
     email: "info@schuggies-ceilidhs.co.uk",
-    whatsapp: "https://wa.me/441332498839", // update to real WhatsApp number
+    whatsapp: "https://wa.me/447875718702", // real mobile, recovered from the
+    // archived /whatsapp-me/ page (078757 18702) — was previously a guess
+    // derived from the landline, which would not have reached WhatsApp
     calendlyChat: "https://calendly.com/schuggies-ceilidhs/ceilidh-chat-how-a-ceilidh-will-work-for-your-wedding",
     calendlyAvail: "https://calendly.com/schuggies-ceilidhs/private-ceilidh-check-if-im-available-for-your-big-day",
     address: "Suite 69, Sneinton Market Unit 6, Gedling Street, Nottingham, NG1 1DS",
@@ -44,9 +46,13 @@
     { label: "Contact",         href: "pages/contact.html" }
   ];
 
-  // Are we one level deep (inside /pages/)?
+  // How deep below the site root are we? Blog posts live at
+  // /pages/blog/<slug>.html — two levels — so a fixed "../" would have pointed
+  // every nav and footer link on 56 pages at the wrong directory.
+  var segs = location.pathname.replace(/^\/|\/$/g, "").split("/");
+  var depth = Math.max(0, segs.length - 1);          // index.html -> 0
   var inPages = /\/pages\//.test(location.pathname);
-  var base = inPages ? "../" : "";
+  var base = depth ? new Array(depth + 1).join("../") : "";
   function url(href) {
     if (/^https?:|^tel:|^mailto:/.test(href)) return href;
     // href is defined relative to root; adjust for depth

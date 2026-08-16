@@ -1115,3 +1115,9 @@ body.no-scroll { overflow: hidden; }
 .link-list li + li { border-top: 1px solid var(--line); }
 .link-list a { display: block; padding: .9rem .2rem; min-height: 44px; color: var(--ink); line-height: 1.45; }
 .link-list a:hover { color: var(--burgundy); text-decoration: none; padding-left: .5rem; transition: padding .25s var(--ease-lux), color .2s; }
+
+/* --- Long-form article body (blog posts, migrated WordPress pages) --- */
+.prose h2 { margin: clamp(2rem,4vw,2.6rem) 0 .7rem; font-size: clamp(1.25rem,3vw,1.6rem); color: var(--green-deep); }
+.prose h2:first-child { margin-top: 0; }
+.prose p { margin: 0 0 1.1rem; line-height: 1.72; }
+.prose > .check-list { margin-bottom: 1.4rem; }
