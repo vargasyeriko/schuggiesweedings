@@ -1,0 +1,1101 @@
+/* ============================================================
+   Schuggies-Ceilidhs — Design System
+   Fonts: Montserrat (headings) · Hind (body)
+   Palette from live site
+   Mobile-first. Every layout scales up from 360px.
+   ============================================================ */
+
+:root {
+  /* Brand colours — deliberately tight. Five families and nothing else:
+     burgundy, ceilidh green, sage, ivory/paper, ink. The yellow is the one
+     sanctioned extra and exists solely for the locked-prices pill.
+     (Removed: purple, blue-soft, heather, moss, sage-deep — all unused or
+     one-off strays that pulled the palette apart.) */
+  --burgundy:        #a0263b;
+  --burgundy-dark:   #702331;
+  --green:           #3f6b57;   /* ceilidh green — CTA + price-guide frame */
+  --green-dark:      #2f5443;
+  --green-deep:      #23443b;   /* text on green-tinted panels */
+  --ink:             #141414;
+  --ink-soft:        #333333;
+  --sage:            #c0d5d0;
+  --sage-dark:       #9dbcb4;
+  --yellow:          #fef366;   /* locked-prices pill only */
+  --ivory:           #faf7f3;   /* warm ivory — calm base */
+  --paper:           #ffffff;
+  --paper-2:         #faf7f3;   /* unified to ivory for a calmer, intentional feel */
+  --paper-3:         #faf7f3;
+  --line:            #e9e1d8;
+
+  /* Semantic */
+  --bg:              var(--paper);
+  --text:            var(--ink);
+  --muted:           #6b6b6b;
+  --accent:          var(--burgundy);
+  --accent-contrast: #ffffff;
+
+  /* Type */
+  --font-head: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Hind", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Rhythm */
+  --maxw: 1180px;
+  --gutter: clamp(1.1rem, 5vw, 2.5rem);
+  --radius-sm: 12px;  /* small controls: icon tiles, inputs, chat bubbles */
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 2px 10px rgba(20,20,20,.06);
+  --shadow-md: 0 10px 30px rgba(20,20,20,.10);
+  --shadow-lg: 0 24px 60px rgba(20,20,20,.16);
+  --ease: cubic-bezier(.16,.84,.44,1);
+
+  /* Shared tick mark, used as a CSS mask so it inherits whatever colour the
+     component sets. Replaces the emoji that used to sit in feature tiles. */
+  --tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+/* ---------- Reset-ish ---------- */
+*,*::before,*::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  font-size: 1.02rem;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  background: var(--ivory);
+}
+img { max-width: 100%; display: block; }
+a { color: var(--burgundy); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font-family: inherit; }
+
+/* Visible keyboard focus for accessibility (mouse clicks stay clean) */
+:focus-visible { outline: 3px solid var(--burgundy); outline-offset: 2px; border-radius: 4px; }
+.btn:focus-visible, .btn--sage:focus-visible { outline-color: var(--ink); }
+.section--ink :focus-visible, .hero :focus-visible, .band :focus-visible { outline-color: #fff; }
+
+h1,h2,h3,h4 {
+  font-family: var(--font-head);
+  line-height: 1.12;
+  margin: 0 0 .5em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: clamp(2rem, 7vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 5.2vw, 2.6rem); }
+h3 { font-size: clamp(1.2rem, 3.6vw, 1.5rem); }
+p  { margin: 0 0 1rem; }
+
+.eyebrow {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .74rem;
+  font-weight: 700;
+  color: var(--burgundy);
+  margin: 0 0 .8rem;
+}
+.text-center { text-align: center; }
+.muted { color: var(--muted); }
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.section { padding-block: clamp(4.5rem, 13vw, 9rem); }
+.section--tight { padding-block: clamp(3rem, 8vw, 5rem); }
+.section--sage   { background: var(--sage); }
+.section--ink    { background: var(--ink); color: #f4f0ee; }
+.section--paper2 { background: var(--paper-2); }
+.section--ink h1, .section--ink h2, .section--ink h3 { color: #fff; }
+.section--ink .eyebrow { color: var(--sage); }
+
+.grid { display: grid; gap: clamp(1.5rem, 3.5vw, 2.6rem); }
+@media (min-width: 720px)  { .grid-2 { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 900px)  { .grid-3 { grid-template-columns: repeat(3,1fr); } }
+.split { display: grid; gap: clamp(2rem,6vw,4.5rem); align-items: center; }
+@media (min-width: 860px)  { .split { grid-template-columns: 1fr 1fr; } .split--wide-left { grid-template-columns: 1.15fr 1fr; } }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--font-head);
+  font-weight: 700; font-size: .82rem;
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: .95rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .2s, color .2s;
+  text-decoration: none !important;
+  line-height: 1;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn:active { transform: translateY(0); }
+.btn--primary { background: var(--burgundy); color: #fff; }
+.btn--primary:hover { background: var(--burgundy-dark); }
+/* Book a Chat is the one journey we always want people on, so it gets its own
+   colour — ceilidh green — and keeps it everywhere: header, mobile nav, and
+   every in-page CTA. Burgundy stays the general-purpose action colour. */
+.btn--chat { background: var(--green); color: #fff; }
+.btn--chat:hover { background: var(--green-dark); color: #fff; }
+.btn--chat:focus-visible { outline-color: var(--green-deep); }
+.btn--sage { background: var(--sage); color: var(--ink); }
+.btn--sage:hover { background: var(--sage-dark); }
+.btn--ghost { background: transparent; color: var(--burgundy); border-color: var(--burgundy); }
+.btn--ghost:hover { background: var(--burgundy); color: #fff; }
+.btn--light { background: #fff; color: var(--burgundy); }
+.btn--block { display: flex; width: 100%; justify-content: center; }
+.btn-row { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+/* ============================================================
+   PATTERN LAYER
+   Every one of these replaced a repeated inline style="…".
+   One class per pattern, reused across all pages — an inline
+   style is a one-off exception, and enough of them make a
+   designed system read as a tinkered-with one.
+   ============================================================ */
+
+/* Section intro: eyebrow → h2 → one or two lines. The standard
+   opening for every major section on every page. */
+.section__intro { text-align: center; max-width: 56ch; margin-inline: auto; }
+.section__intro--narrow { max-width: 52ch; }
+.section__intro--spaced { margin-bottom: clamp(2rem, 5vw, 3rem); }
+
+/* Measured containers — reading widths, not arbitrary pixel values. */
+.container--tight   { max-width: 700px; }
+.container--narrow  { max-width: 760px; }
+.container--reading { max-width: 820px; }
+.container--cards   { max-width: 900px; margin-inline: auto; }
+
+/* Button rows */
+.btn-row--center { justify-content: center; margin-top: 1.4rem; }
+.btn-row--center-lg { justify-content: center; margin-top: clamp(1.8rem, 4vw, 2.4rem); }
+.btn-row--start { justify-content: flex-start; margin-top: 1.2rem; }
+
+/* Eyebrow on dark/photographic backgrounds */
+.eyebrow--sage { color: var(--sage); }
+
+/* Interior hero — shorter than the homepage hero */
+.hero--short { min-height: clamp(420px, 60vh, 560px); }
+
+/* Grid that sits below a section intro */
+.grid--below-intro { margin-top: clamp(2.4rem, 5vw, 3.75rem); }
+
+/* FAQ group headings — these are chapter markers, so they get
+   their own treatment rather than looking like a card title. */
+.faq-group {
+  margin: clamp(2.6rem, 6vw, 3.4rem) 0 1.4rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(1.3rem, 3.2vw, 1.6rem);
+  color: var(--green-deep);
+}
+.faq-group:first-of-type { margin-top: 0; }
+
+/* Small shared utilities — deliberately few. */
+.u-m0 { margin: 0; }
+.u-gap-1 { gap: 1rem; }
+.u-mt-auto { margin-top: auto; }
+.u-soft { opacity: .85; }
+.stat-figure { color: var(--burgundy-dark); }
+
+/* Vertical rhythm: four steps, nothing between. The inline margins these
+   replaced ran 1 / 1.2 / 1.4 / 1.5 / 2 / 2.2rem — near-identical values that
+   read as drift rather than intent. */
+.u-mt-1 { margin-top: .5rem; }  .u-mb-1 { margin-bottom: .5rem; }
+.u-mt-2 { margin-top: 1rem; }   .u-mb-2 { margin-bottom: 1rem; }
+.u-mt-3 { margin-top: 1.5rem; } .u-mb-3 { margin-bottom: 1.5rem; }
+.u-mt-4 { margin-top: 2rem; }   .u-mb-4 { margin-bottom: 2rem; }
+
+/* Remaining one-offs, now named. */
+.section--hero-pad { padding-top: clamp(2.5rem, 7vw, 4rem); }
+.section--flush-top { padding-top: 0; }
+.is-relative { position: relative; }
+.hero__title-shadow { color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,.45); }
+.hero__sub { color: #f2efe9; max-width: 52ch; margin-inline: auto; }
+.form-status { display: none; font-size: .9rem; margin: 0; }
+.form-status.is-visible { display: block; }
+.contact-hero__bg { background-image: url("../images/contact-hills.jpg"); }
+
+/* ---------- Three easy steps ----------
+   Modernised take on the old "simple steps to your ceilidh" circle graphic:
+   a numbered ceilidh-green disc per step, stacked on phones, in a row from
+   720px. Semantically an <ol>, so the order survives without CSS. */
+.steps {
+  list-style: none; margin: clamp(2.2rem,5vw,3.2rem) 0 0; padding: 0;
+  display: grid; gap: clamp(1.8rem, 4vw, 2.6rem);
+  counter-reset: step;
+}
+@media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+.step { text-align: center; }
+.step__num {
+  width: 84px; height: 84px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  display: grid; place-items: center; margin: 0 auto 1.1rem;
+  font-family: var(--font-head); font-weight: 800; font-size: 2rem;
+  box-shadow: 0 8px 22px rgba(63,107,87,.28);
+}
+.step h3 { margin: 0 0 .4rem; color: var(--green-deep); }
+.step p  { margin: 0; color: var(--ink-soft); max-width: 34ch; margin-inline: auto; }
+
+/* ---------- Low-emphasis corporate note ----------
+   Deliberately quiet: one line, sage rule, no photo — discoverable near the
+   footer without competing with the weddings/parties story above it. */
+.corp-note {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1.2rem;
+  border: 1px solid var(--line); border-left: 4px solid var(--sage);
+  background: var(--paper); border-radius: var(--radius);
+  padding: clamp(1.2rem, 3vw, 1.8rem) clamp(1.2rem, 3vw, 2rem);
+}
+.corp-note h3 { font-size: 1.15rem; }
+.corp-note p  { color: var(--muted); max-width: 60ch; }
+
+/* ---------- Motion ----------
+   One reveal system, and it yields to the OS setting. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .btn:hover { transform: none; }
+}
+
+/* ---------- Touch targets ----------
+   Measured at 390px: topbar links, footer links, social icons and the chatbot
+   controls were all 21–41px tall. Padding (not font size) brings them to the
+   44px minimum, so nothing changes visually on desktop. */
+@media (max-width: 900px) {
+  .topbar__item { min-height: 44px; padding-block: .5rem; }
+  .topbar .container { padding-block: .2rem; }
+  .footer-links a { display: inline-block; padding-block: .55rem; min-height: 44px; }
+  .social-row a { min-width: 44px; min-height: 44px; display: inline-grid; place-items: center; }
+  .mobile-nav a { min-height: 44px; display: flex; align-items: center; }
+  /* Privacy · Terms in the footer bottom bar */
+  .footer-bottom a { display: inline-block; padding-block: .6rem; min-height: 44px; }
+}
+/* box-sizing would otherwise let the border eat into the 44px */
+.cbot__close, .cbot__send { min-width: 44px; min-height: 44px; box-sizing: content-box; }
+
+/* ---------- Header / Nav ---------- */
+.topbar {
+  background: var(--burgundy-dark);
+  color: #fff;
+  font-size: .8rem;
+  letter-spacing: .02em;
+}
+.topbar .container {
+  display: flex; align-items: center; justify-content: center; gap: 1.4rem;
+  padding-block: .5rem; flex-wrap: wrap; text-align: center;
+}
+.topbar a { color: #fff; }
+.topbar__item { display: inline-flex; align-items: center; gap: .4rem; }
+
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow .3s;
+}
+.site-header.is-scrolled { box-shadow: var(--shadow-sm); }
+/* The container caps at 1180px, so the header row has ~1100px to work with at
+   ANY screen width — widening the browser never adds room. Everything below is
+   sized to fit that budget. min-width:0 on the shrinkable parts means that if
+   it ever does run tight, items compress instead of overlapping each other. */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: clamp(.6rem, 1.2vw, 1rem); padding-block: .7rem; min-height: 64px;
+}
+.nav > .brand { flex: 0 0 auto; min-width: 0; }
+.nav > .nav__cta { flex: 0 0 auto; }
+.brand { display: flex; align-items: center; gap: .6rem; text-decoration: none !important; }
+/* Mascot logo. Transparent PNG, so no plate or radius behind it — it sits
+   straight on the header. Height-driven; width follows the 1.14:1 artwork. */
+.brand__logo { height: 46px; width: auto; flex: none; display: block; }
+/* Keep "Schuggies-Ceilidhs" on one line — broken across two it reads as two
+   words. The tagline's wide letter-spacing was what pushed the row over
+   budget, so it is tightened here rather than allowed to overflow. */
+.brand__text { font-family: var(--font-head); font-weight: 800; color: var(--ink); line-height: 1.15; white-space: nowrap; font-size: .95rem; }
+.brand__text small { display: block; font-weight: 600; font-size: .56rem; letter-spacing: .09em; text-transform: uppercase; color: var(--burgundy); margin-top: 3px; white-space: nowrap; }
+
+.nav__links { display: none; }
+.nav__links a {
+  font-family: var(--font-head); font-weight: 700; font-size: .8rem;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--ink);
+  padding: .5rem .2rem; position: relative;
+}
+.nav__links a::after {
+  content: ""; position: absolute; left: .2rem; right: .2rem; bottom: -2px; height: 2px;
+  background: var(--burgundy); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
+}
+.nav__links a:hover, .nav__links a[aria-current="page"] { text-decoration: none; }
+.nav__links a:hover::after, .nav__links a[aria-current="page"]::after { transform: scaleX(1); }
+
+.nav__cta { display: none; }
+
+.nav__toggle {
+  display: inline-flex; flex-direction: column; gap: 5px; justify-content: center;
+  width: 46px; height: 46px; padding: 0 11px; border: none; border-radius: var(--radius-sm);
+  background: var(--sage); cursor: pointer;
+}
+.nav__toggle span { height: 2.5px; background: var(--ink); border-radius: 2px; transition: transform .3s var(--ease), opacity .2s; }
+.nav__toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(7.5px) rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+.nav__toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7.5px) rotate(-45deg); }
+
+/* The brief's nav is 8 items. Rather than delay the horizontal bar to a width
+   where it fits comfortably (which hid the nav on ordinary laptop windows),
+   the bar appears at 1000px as before and the row is made to fit: labels never
+   wrap, and the brand gives up space before the nav does. */
+@media (min-width: 1000px) {
+  .nav__links { display: flex; align-items: center; flex: 0 1 auto; min-width: 0;
+                gap: clamp(.5rem, 0.95vw, 1.05rem); }
+  .nav__links a { white-space: nowrap; font-size: .73rem; letter-spacing: .02em; padding-inline: 0; }
+  .nav__cta { display: inline-flex; white-space: nowrap; font-size: .74rem; padding: .85rem 1.15rem; }
+  .nav__toggle { display: none; }
+}
+/* Below ~1120px the container is narrower than its 1180px cap, so the row
+   genuinely has less room: the logo carries the brand on its own there. */
+@media (min-width: 1000px) and (max-width: 1119px) {
+  .brand__text { display: none; }
+}
+
+/* Mobile drawer */
+.mobile-nav {
+  position: fixed; inset: 0 0 0 auto; width: min(86vw, 360px);
+  background: #fff; z-index: 200; transform: translateX(100%);
+  transition: transform .35s var(--ease); box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column; padding: 1.5rem 1.4rem calc(1.4rem + env(safe-area-inset-bottom));
+  overflow-y: auto;
+}
+.mobile-nav.is-open { transform: translateX(0); }
+.mobile-nav__head { display:flex; justify-content: space-between; align-items:center; margin-bottom: 1.4rem; }
+.mobile-nav__close { width:44px;height:44px;border:none;background:var(--paper-2);border-radius:var(--radius-sm);font-size:1.4rem;cursor:pointer;line-height:1; }
+.mobile-nav a {
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+  letter-spacing: .04em; font-size: .95rem; color: var(--ink);
+  padding: 1rem .2rem; border-bottom: 1px solid var(--line); display: block;
+}
+.mobile-nav a:hover { color: var(--burgundy); text-decoration: none; }
+.mobile-nav .btn { margin-top: 1.4rem; }
+.scrim {
+  position: fixed; inset: 0; background: rgba(20,20,20,.5); z-index: 150;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.scrim.is-open { opacity: 1; pointer-events: auto; }
+body.no-scroll { overflow: hidden; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; background: var(--ink); color: #fff; overflow: hidden;
+  min-height: clamp(520px, 88vh, 760px);
+  display: grid; align-items: center;
+}
+/* Phones: a shorter hero asks far less of a 1080px source. At 88vh on a DPR-3
+   phone the box wants ~2229 device px of height from 1080px of detail — a 2.1x
+   upscale, which is exactly what reads as "pixelly". 62vh cuts that to ~1.4x. */
+@media (max-width: 700px) {
+  .hero { min-height: clamp(440px, 62vh, 560px); }
+  .hero__media img { object-position: center 32%; }
+}
+.hero__media { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+/* Square source, wide frame — bias the crop upward so faces survive instead of
+   the visible band landing on people's waists. */
+.hero__media img { width:100%; height:100%; object-fit: cover; object-position: center 38%; display:block; }
+/* Scrim is weighted LEFT, behind the copy, and clears by ~65% so the right of
+   the photo keeps its colour and energy. The old full-width burgundy wash sat
+   at 62% opacity over everything and flattened the whole image. */
+.hero__media::after {
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(100deg, rgba(18,18,18,.90) 0%, rgba(45,20,26,.80) 24%, rgba(112,35,49,.32) 42%, rgba(112,35,49,.06) 56%, rgba(20,20,20,0) 70%),
+    linear-gradient(180deg, rgba(20,20,20,.28) 0%, rgba(20,20,20,0) 30%, rgba(20,20,20,0) 62%, rgba(20,20,20,.62) 100%);
+}
+.hero__media .placeholder-img { height: 100%; border-radius: 0; }
+.hero__inner { position: relative; z-index: 1; padding-block: clamp(3rem,10vw,5rem); max-width: 760px; }
+.hero h1 { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.3); }
+.hero p.lead { font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: #f7efef; max-width: 42ch; }
+/* The definition line — supporting, not competing with the lead. Replaces an
+   inline style="font-size:..." so the type scale lives in one place. */
+.hero__def {
+  font-size: .98rem; line-height: 1.55; color: #e9dcdc;
+  max-width: 46ch; margin-top: .9rem;
+  padding-left: .9rem; border-left: 2px solid var(--sage);
+}
+.hero .btn-row { margin-top: 1.6rem; }
+.hero__badges { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2.8rem; }
+.hero__badge { display:flex; align-items:center; gap:.5rem; font-size:.85rem; font-weight:600; }
+.hero__badge b { font-family: var(--font-head); font-size:1.4rem; color: var(--yellow); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.card__media { aspect-ratio: 4/3; }
+.card__body { padding: 1.8rem 1.7rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
+.card__body h3 { margin: 0; }
+.card__body .btn { margin-top: auto; align-self: flex-start; }
+.card__tag {
+  font-family: var(--font-head); font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em; color: var(--burgundy);
+}
+
+/* Feature / value list */
+.feature { display: flex; gap: 1rem; align-items: flex-start; }
+/* These tiles used to hold an emoji each. The mark is now drawn in CSS so the
+   markup carries no decoration and every tile is identical and on-palette. */
+.feature__icon {
+  flex: none; width: 46px; height: 46px; border-radius: var(--radius-sm);
+  background: var(--sage); display: grid; place-items: center; font-size: 1.3rem;
+}
+.feature__icon::before {
+  content: ""; width: 22px; height: 22px; background-color: var(--green-deep);
+  -webkit-mask: var(--tick) center/contain no-repeat;
+          mask: var(--tick) center/contain no-repeat;
+}
+.feature h3 { margin: .1rem 0 .3rem; font-size: 1.1rem; }
+.feature p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* Price cards */
+.price-card {
+  background:#fff; border:2px solid var(--line); border-radius: var(--radius-lg);
+  padding: 1.8rem 1.6rem; display:flex; flex-direction:column; gap:.4rem; position:relative;
+}
+.price-card--featured { border-color: var(--burgundy); box-shadow: var(--shadow-md); }
+.price-card__flag {
+  position:absolute; top:-13px; left:1.6rem; background: var(--burgundy); color:#fff;
+  font-family:var(--font-head); font-size:.68rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; padding:.35rem .8rem; border-radius:999px;
+}
+.price-card__price { font-family:var(--font-head); font-weight:800; font-size:2.4rem; color:var(--ink); line-height:1; }
+.price-card__price small { font-size:.9rem; font-weight:600; color:var(--muted); }
+.price-card ul { list-style:none; margin:.8rem 0 1.4rem; padding:0; display:grid; gap:.6rem; }
+.price-card li { display:flex; gap:.6rem; align-items:flex-start; font-size:.95rem; }
+.price-card li::before { content:"✓"; color: var(--burgundy); font-weight:800; }
+.price-card .btn { margin-top:auto; }
+
+/* Testimonials */
+.quote {
+  background:#fff; border-radius: var(--radius-lg); padding: 1.8rem;
+  box-shadow: var(--shadow-sm); border:1px solid var(--line);
+}
+.quote p { font-size:1.05rem; font-style: italic; }
+.quote__stars { color: #f4b400; letter-spacing:2px; margin-bottom:.6rem; }
+.quote__who { font-family:var(--font-head); font-weight:700; font-size:.9rem; color:var(--burgundy); font-style:normal; }
+
+/* Placeholder image blocks */
+.placeholder-img {
+  width:100%; height:100%;
+  background:
+    repeating-linear-gradient(45deg, rgba(160,38,59,.06) 0 12px, rgba(160,38,59,.11) 12px 24px),
+    linear-gradient(135deg, var(--sage), var(--sage-dark));
+  display:grid; place-items:center; text-align:center;
+  color: var(--burgundy-dark); font-family:var(--font-head); font-weight:700;
+  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:1rem;
+}
+.placeholder-img span { opacity:.75; max-width: 22ch; }
+.placeholder-img::before { content:"⤷ image"; display:none; }
+
+/* Banner / CTA strip */
+/* The closing CTA is the last thing anyone reads, so it gets a stage: more air
+   above it than between ordinary sections, and clear separation from the
+   footer so the page ends on a statement rather than just stopping. */
+.section--closing { padding-block: clamp(4rem, 10vw, 6.5rem) clamp(3.5rem, 8vw, 5rem); }
+.cta-strip { background: linear-gradient(120deg, var(--burgundy), var(--burgundy-dark)); color:#fff; text-align:center; border-radius: var(--radius-lg); padding: clamp(2rem,6vw,3.4rem); box-shadow: var(--shadow-md); }
+.cta-strip h2 { color:#fff; }
+.cta-strip p { color:#f2e2e5; max-width: 52ch; margin-inline:auto; }
+
+/* Pills / logos */
+.pill-row { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; }
+.pill { background:#fff; border:1px solid var(--line); border-radius:999px; padding:.5rem 1rem; font-size:.85rem; font-weight:600; box-shadow: var(--shadow-sm); }
+
+/* FAQ / accordion */
+.acc { border:1px solid var(--line); border-radius: var(--radius); overflow:hidden; background:#fff; }
+.acc + .acc { margin-top: .8rem; }
+.acc__q {
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding: 1.1rem 1.3rem; font-family:var(--font-head); font-weight:700; font-size:1rem;
+  display:flex; justify-content:space-between; gap:1rem; align-items:center; color:var(--ink);
+}
+.acc__q::after { content:"+"; font-size:1.4rem; color:var(--burgundy); transition: transform .3s; }
+.acc.is-open .acc__q::after { transform: rotate(45deg); }
+.acc__a { max-height:0; overflow:hidden; transition: max-height .35s var(--ease); }
+.acc__a-inner { padding: 0 1.3rem 1.2rem; color: var(--muted); }
+
+/* Forms */
+.form { display:grid; gap:1rem; }
+.field { display:grid; gap:.4rem; }
+.field label { font-family:var(--font-head); font-weight:700; font-size:.82rem; }
+.field input, .field textarea, .field select {
+  font-family: var(--font-body); font-size:1rem; padding:.85rem 1rem;
+  border:1px solid var(--line); border-radius: var(--radius-sm); background:#fff; width:100%;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline:none; border-color: var(--burgundy); box-shadow: 0 0 0 3px rgba(160,38,59,.12);
+}
+.field textarea { min-height:130px; resize:vertical; }
+
+/* ---------- Footer ---------- */
+/* Bottom edge: the footer owns the safe-area inset, and on phones it reserves
+   room for the WhatsApp + chat floats so they never sit over footer links.
+   (This is the authoritative .site-footer rule — an earlier padding-bottom was
+   being silently overridden by the padding-block shorthand here.) */
+.site-footer {
+  background: var(--ink); color:#cfc7c5; font-size:.92rem;
+  padding-block: clamp(2.5rem,7vw,4rem) max(2rem, calc(env(safe-area-inset-bottom) + 1.5rem));
+}
+@media (max-width: 700px) {
+  .site-footer { padding-bottom: max(6.5rem, calc(env(safe-area-inset-bottom) + 6rem)); }
+}
+.site-footer h4 { color:#fff; font-size:.85rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:1rem; }
+.site-footer a { color:#cfc7c5; }
+.site-footer a:hover { color:#fff; }
+.footer-grid { display:grid; gap:2rem; }
+@media (min-width:700px){ .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+.footer-links { list-style:none; padding:0; margin:0; display:grid; gap:.6rem; }
+.social-row { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem; }
+.social-row a {
+  width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.08);
+  display:grid; place-items:center; font-size:1rem; transition: background .2s, transform .2s;
+}
+.social-row a:hover { background: var(--burgundy); transform: translateY(-2px); text-decoration:none; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-block:1.4rem; font-size:.8rem; color:#9a9290; display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; justify-content:space-between; }
+
+/* ---------- WhatsApp float ---------- */
+.wa-float {
+  position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 120;
+  display:flex; align-items:center; gap:.6rem;
+}
+.wa-float__label { background:#fff; box-shadow: var(--shadow-md); border-radius:999px; padding:.55rem .9rem; font-size:.85rem; font-weight:600; color:var(--ink); }
+.wa-float__btn { width:58px; height:58px; border-radius:50%; background:#25d366; display:grid; place-items:center; box-shadow: var(--shadow-md); }
+.wa-float__btn svg { width:30px; height:30px; }
+.wa-float__btn:hover { text-decoration:none; }
+@media (max-width:520px){ .wa-float__label { display:none; } }
+
+/* ---------- Reveal on scroll ---------- */
+.reveal { opacity:0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.is-visible { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal { opacity:1; transform:none; transition:none; }
+  html { scroll-behavior:auto; }
+}
+
+/* Utility */
+.lead { font-size: clamp(1.05rem,2.4vw,1.25rem); color: var(--ink-soft); }
+.mt-0{margin-top:0}.mb-0{margin-bottom:0}
+.stack > * + * { margin-top: 1.5rem; }
+.badge-note { display:inline-block; background: var(--yellow); color: var(--ink); font-family:var(--font-head); font-weight:700; font-size:.8rem; padding:.35rem .8rem; border-radius:999px; }
+
+/* ============================================================
+   Real-image treatments + raw / natural texture
+   ============================================================ */
+.card__media img { width:100%; height:100%; object-fit: cover; display:block; }
+.imgframe { border-radius: var(--radius-lg); overflow:hidden; box-shadow: var(--shadow-md); position:relative; }
+.imgframe img { width:100%; height:100%; object-fit: cover; display:block; }
+.imgframe--tall { aspect-ratio: 4/5; }
+.imgframe--square { aspect-ratio: 1; }
+.imgframe--wide { aspect-ratio: 16/10; }
+.imgframe--stamp::after {
+  content:""; position:absolute; inset:0; pointer-events:none;
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,.85), inset 0 0 0 8px var(--line);
+}
+/* subtle film grain for that raw, natural feel */
+.grain::before {
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+.hero .container { z-index: 2; }
+
+/* warm natural section */
+.section--natural { background: var(--paper-3); }
+.section--moss h1,.section--moss h2,.section--moss h3{ color:#fff; }
+.section--moss .eyebrow{ color: var(--sage); }
+
+/* Full-bleed image band (parallax-ish) */
+.band {
+  position: relative; color:#fff; text-align:center; overflow:hidden;
+  background-size: cover; background-position: center; background-attachment: fixed;
+}
+@media (hover:none){ .band { background-attachment: scroll; } }
+.band::before { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(20,20,20,.55), rgba(112,35,49,.6)); }
+.band > .container { position:relative; z-index:1; padding-block: clamp(3.5rem,10vw,6rem); }
+.band h2 { color:#fff; }
+.band p { color:#f2e7e7; }
+
+/* ============================================================
+   Contact-over-hills section (like the live site, refined)
+   ============================================================ */
+.contact-hero { position: relative; background-size: cover; background-position: center; overflow:hidden; }
+.contact-hero::before { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(30,40,25,.55), rgba(85,96,63,.45)); }
+.contact-hero > .container { position:relative; z-index:1; padding-block: clamp(3rem,8vw,5rem); }
+.contact-grid { display:grid; gap: clamp(1.4rem,4vw,2.4rem); align-items:start; }
+@media (min-width: 900px){ .contact-grid { grid-template-columns: 1.15fr .85fr; } }
+.contact-card {
+  background: rgba(255,255,255,.97); border-radius: var(--radius-lg);
+  padding: clamp(1.4rem,4vw,2.2rem); box-shadow: var(--shadow-lg);
+}
+.contact-info { color:#fff; }
+.contact-info h2 { color:#fff; text-shadow: 0 2px 20px rgba(0,0,0,.4); }
+.contact-info .info-item { display:flex; gap:1rem; align-items:flex-start; padding:1rem 0; border-bottom:1px solid rgba(255,255,255,.25); }
+.contact-info .info-item:last-child { border-bottom:none; }
+.contact-info .info-icon { flex:none; width:52px; height:52px; border-radius:50%; border:2px solid rgba(255,255,255,.85); display:grid; place-items:center; font-size:1.4rem; }
+.contact-info h3 { color:#fff; font-size:.85rem; text-transform:uppercase; letter-spacing:.12em; margin:0 0 .2rem; }
+.contact-info a { color:#fff; }
+.contact-info p { color:#f3f0ea; margin:0; }
+
+/* Footer sits on dark burgundy — give the logo a touch more room there. */
+.brand__logo--footer { height: 60px; }
+.brand__text--footer { color: #fff; }
+
+/* stat band on images */
+.overlay-quote { position:relative; }
+
+/* ============================================================
+   Ollama chatbot widget (bottom-left)
+   ============================================================ */
+.cbot { position: fixed; left: 18px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 130; }
+.cbot__fab {
+  width: 58px; height: 58px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--burgundy); color: #fff; box-shadow: var(--shadow-md);
+  display: grid; place-items: center; transition: transform .2s var(--ease), background .2s;
+}
+.cbot__fab svg { width: 26px; height: 26px; }
+.cbot__fab:hover { transform: translateY(-2px); background: var(--burgundy-dark); }
+.cbot__panel {
+  position: absolute; left: 0; bottom: 72px; width: min(92vw, 360px); height: min(72vh, 520px);
+  background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line);
+  opacity: 0; transform: translateY(12px) scale(.98); transform-origin: bottom left;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.cbot__panel.is-open { opacity: 1; transform: none; }
+.cbot__head {
+  display: flex; align-items: center; gap: .7rem; padding: .9rem 1rem;
+  background: var(--burgundy); color: #fff;
+}
+.cbot__mark { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.2); display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; font-size: .8rem; flex: none; }
+.cbot__head strong { font-family: var(--font-head); font-size: .95rem; display: block; line-height: 1.1; }
+.cbot__head small { font-size: .68rem; opacity: .85; }
+.cbot__head div { flex: 1; }
+.cbot__close { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; opacity: .85; }
+.cbot__close:hover { opacity: 1; }
+.cbot__log { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; background: var(--paper-2); }
+.cbot__msg { max-width: 85%; padding: .65rem .85rem; border-radius: var(--radius-sm); font-size: .92rem; line-height: 1.45; white-space: pre-wrap; }
+.cbot__msg--bot { background: #fff; border: 1px solid var(--line); align-self: flex-start; border-bottom-left-radius: 4px; }
+.cbot__msg--user { background: var(--burgundy); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.cbot__msg--err { background: #fdecef; border: 1px solid #f5c2cd; color: #8a1f33; align-self: flex-start; }
+.cbot__msg--typing { color: var(--muted); letter-spacing: 2px; }
+.cbot__form { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid var(--line); background: #fff; }
+.cbot__input { flex: 1; border: 1.5px solid var(--line); border-radius: 999px; padding: .6rem .95rem; font: inherit; font-size: .92rem; }
+.cbot__input:focus { outline: none; border-color: var(--burgundy); box-shadow: 0 0 0 3px rgba(160,38,59,.12); }
+.cbot__send { flex: none; width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--burgundy); color: #fff; cursor: pointer; font-size: 1rem; }
+.cbot__send:hover { background: var(--burgundy-dark); }
+.cbot__chips { display: flex; flex-wrap: wrap; gap: .45rem; align-self: flex-start; max-width: 100%; }
+.cbot__chip {
+  background: #fff; border: 1.5px solid var(--sage-dark); color: var(--burgundy);
+  border-radius: 999px; padding: .4rem .8rem; font: inherit; font-size: .8rem; font-weight: 600;
+  cursor: pointer; transition: background .2s, color .2s;
+}
+.cbot__chip:hover { background: var(--burgundy); color: #fff; border-color: var(--burgundy); }
+
+/* ============================================================
+   Ceilidh Price Guide — premium responsive banner
+   (recreation of the printed guide; crisp on every device)
+   ============================================================ */
+.pg {
+  --pg-bg: #cddccf;
+  --pg-ink: var(--green-deep);
+  --pg-price: #8a2836;
+  --pg-frame: var(--green);
+  background:
+    radial-gradient(120% 90% at 50% 0%, #d7e5da 0%, var(--pg-bg) 55%, #c3d5c7 100%);
+  color: var(--pg-ink);
+}
+.pg .container { max-width: 1120px; }
+.pg-display { font-family: "Playfair Display", Georgia, serif; letter-spacing: .01em; }
+.pg-head { text-align: center; }
+.pg-head h1, .pg-head h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--pg-ink); font-weight: 800;
+  font-size: clamp(2.3rem, 6vw, 3.6rem); margin: 0;
+}
+.pg-head p { color: var(--pg-ink); opacity: .85; margin: .4rem 0 0; font-size: 1.02rem; }
+
+.pg-grid { display: grid; gap: clamp(1rem, 2.5vw, 1.6rem); margin-top: clamp(1.6rem, 4vw, 2.6rem); }
+@media (min-width: 760px) { .pg-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* Framed card with the Celtic knot corner from the printed price guide.
+   Traced off the artwork: the corner is a 7u x 7u square spiral (u = stroke
+   width) ending in a 1u hole, and the same motif is mirrored on both axes —
+   not rotated, so all four read the same way up.
+
+   Drawn as a 40x40 SVG sliced at 14 by border-image, which is the one
+   mechanism that keeps corners undistorted while stretching only the straight
+   runs between them. Border width is 7u, so the 14-unit slice scales x1.5 and
+   the 2-unit stroke lands exactly on --pg-u. Square corners are required —
+   a border-radius would cut through the motif. */
+.pg-card {
+  --pg-u: 3px;                                  /* stroke width */
+  position: relative; background: rgba(255,255,255,.28);
+  border: calc(var(--pg-u) * 7) solid transparent;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M27 1H13V9H5V5H9V13H1V27H9V35H5V31H13V39H27V31H35V35H31V27H39V13H31V5H35V9H27Z' fill='none' stroke='%233f6b57' stroke-width='2'/%3E%3C/svg%3E") 14 stretch;
+  padding: clamp(.7rem, 1.6vw, 1rem) clamp(.5rem, 1.4vw, .9rem);
+  text-align: center; display: flex; flex-direction: column;
+}
+.pg-card__name {
+  font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-style: italic;
+  font-size: clamp(1.35rem, 3vw, 1.7rem); line-height: 1.15; color: var(--pg-ink); margin: 0 0 .2rem;
+}
+.pg-rule { width: 46px; height: 2px; background: var(--pg-frame); border: 0; margin: .7rem auto 1rem; opacity: .6; }
+.pg-tier { font-size: .92rem; opacity: .85; margin: .2rem 0 .1rem; }
+.pg-price {
+  font-family: "Playfair Display", Georgia, serif; font-weight: 800;
+  color: var(--pg-price); font-size: clamp(2.6rem, 7vw, 3.4rem); line-height: 1; margin: .1rem 0 .3rem;
+}
+.pg-note { font-size: .86rem; opacity: .8; margin: 0 0 .6rem; }
+.pg-card--tiers .pg-price { font-size: clamp(2.2rem, 6vw, 2.9rem); }
+
+/* Included lists */
+.pg-incl { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .8rem; }
+.pg-incl li { position: relative; padding-top: .8rem; font-size: .95rem; line-height: 1.35; }
+.pg-incl li + li::before {
+  content: "✦"; position: absolute; top: -.15rem; left: 50%; transform: translateX(-50%);
+  color: var(--pg-frame); font-size: .7rem; opacity: .7;
+}
+.pg-incl li:first-child { padding-top: 0; }
+.pg-incl b { display: block; }
+
+.pg-fine { text-align: center; max-width: 62ch; margin: clamp(1.4rem,4vw,2.2rem) auto 0; }
+.pg-fine p { color: var(--pg-ink); opacity: .9; margin: 0 0 .7rem; font-size: .98rem; }
+.pg-fine .pg-display { font-size: 1.15rem; }
+
+.pg-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.6rem; }
+.btn--pg { background: var(--pg-frame); color: #fff; }
+.btn--pg:hover { background: var(--green-dark); }
+.btn--pg-ghost { background: transparent; color: var(--pg-ink); border-color: var(--pg-frame); }
+.btn--pg-ghost:hover { background: var(--pg-frame); color: #fff; }
+
+.pg-kind {
+  margin-top: clamp(1.8rem,5vw,3rem); background: rgba(255,255,255,.4);
+  border: 1px solid var(--pg-frame); border-radius: var(--radius); padding: clamp(1.4rem,3vw,2rem);
+}
+.pg-kind h2 { font-family: "Playfair Display", Georgia, serif; color: var(--pg-ink); text-align: center; margin: 0 0 1rem; }
+.pg-kind blockquote { margin: 0; font-style: italic; line-height: 1.6; max-width: 60ch; margin-inline: auto; text-align: center; }
+.pg-kind cite { display: block; margin-top: .8rem; font-style: normal; font-weight: 600; font-size: .9rem; opacity: .8; }
+
+/* Responsive video embed (16:9) */
+.video-wrap {
+  position: relative; width: 100%; max-width: 960px; margin-inline: auto;
+  aspect-ratio: 16/9; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-lg); border: 3px solid rgba(255,255,255,.9);
+  background: #000;
+}
+.video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+
+/* Ghost button on dark hero */
+.btn--on-dark { color:#fff; border-color: rgba(255,255,255,.7); }
+.btn--on-dark:hover { background:#fff; color: var(--burgundy); border-color:#fff; }
+
+/* Note card (Why this matters) */
+.note-card { background:#fff; border-left: 5px solid var(--burgundy); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow-sm); }
+
+/* Gut-punch question checklist */
+.check-list { list-style:none; margin:0; padding:0; display:grid; gap:1rem; }
+.check-list li {
+  position:relative; padding: .9rem 1rem .9rem 3rem; background:#fff;
+  border:1px solid var(--line); border-radius: var(--radius);
+  font-family: var(--font-head); font-weight:600; font-size:1.02rem; line-height:1.35; color: var(--ink);
+}
+.check-list li::before {
+  content:"✓"; position:absolute; left:1rem; top:50%; transform: translateY(-50%);
+  width:24px; height:24px; border-radius:50%; background: var(--burgundy); color:#fff;
+  display:grid; place-items:center; font-size:.8rem; font-weight:800;
+}
+
+/* Detail cards (Why choose me — 4 blocks) */
+.detail-card {
+  background:#fff; border:1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 2.1rem 2rem; box-shadow: var(--shadow-sm); position:relative;
+  border-top: 4px solid var(--sage);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.detail-card h3 { margin-bottom: .7rem; }
+.detail-card p { line-height: 1.7; }
+.detail-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-top-color: var(--burgundy); }
+.detail-card h3 { color: var(--burgundy); }
+.detail-card p { margin:0; color: var(--ink-soft); }
+
+/* Fact list (What you need to know / Meet the expert) */
+.fact-list { list-style:none; margin:1.2rem 0 0; padding:0; display:grid; gap:.85rem; }
+.fact-list li { position:relative; padding-left: 1.9rem; line-height:1.5; }
+.fact-list li::before {
+  content:""; position:absolute; left:0; top:.55em; width:10px; height:10px; border-radius:3px;
+  background: var(--burgundy); transform: rotate(45deg);
+}
+.section--ink .fact-list li, .section--moss .fact-list li { color:#e7dcdc; }
+
+/* Structured decision panel — label + one-line detail in a tidy grid */
+.fact-list--grid { display: grid; grid-template-columns: 1fr; gap: 1.1rem 1.5rem; margin-top: 1.4rem; }
+@media (min-width: 560px) { .fact-list--grid { grid-template-columns: 1fr 1fr; } }
+.fact-list--grid li { position: relative; padding: 0 0 0 1.5rem; }
+.fact-list--grid li::before { content: ""; position: absolute; left: 0; top: .45em; width: 9px; height: 9px; border-radius: 2px; background: var(--burgundy); transform: rotate(45deg); }
+.fact-label { display: block; font-family: var(--font-head); font-weight: 700; font-size: .98rem; color: var(--ink); margin-bottom: .1rem; }
+.fact-detail { display: block; font-size: .9rem; color: var(--muted); line-height: 1.45; }
+
+/* ---------- Phone polish (low-key, roomy, tap-friendly) ---------- */
+@media (max-width: 640px) {
+  .hero { min-height: auto; }
+  .hero__inner { padding-block: clamp(2.5rem, 12vw, 4rem); }
+  .hero h1 { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .hero .btn-row .btn { flex: 1 1 100%; }
+  .hero__badges { gap: 1.2rem 1.6rem; }
+  .btn { padding: .95rem 1.35rem; }
+  .cta-strip .btn-row .btn { flex: 1 1 100%; }
+  .pg-actions .btn { flex: 1 1 100%; }
+}
+
+/* ============================================================
+   PHONE LAYOUT — placement rules for ~375-430px viewports.
+   Kept near the end so these win over the component defaults.
+   ============================================================ */
+@media (max-width: 700px) {
+  /* Hero text sits between centre and bottom so the photo reads above it,
+     rather than the copy pinning to the top and burying the image. */
+  .hero { align-items: end; }
+  .hero__inner { padding-block: clamp(2rem, 8vw, 3.5rem) clamp(2.2rem, 9vw, 3.5rem); }
+  .hero h1 { font-size: clamp(1.9rem, 8.5vw, 2.6rem); }
+  .hero p.lead { font-size: 1.02rem; max-width: 34ch; }
+  .hero__def { font-size: .92rem; max-width: 38ch; }
+  .hero__badges { gap: 1.1rem 1.4rem; margin-top: 1.8rem; }
+
+  /* Four hero CTAs: two tidy rows, never four micro-buttons. */
+  .hero .btn-row { gap: .6rem; }
+  .hero .btn-row .btn { flex: 1 1 calc(50% - .3rem); justify-content: center; }
+
+  /* Top bar: two rows maximum, centred. */
+  .topbar .container { gap: .4rem 1rem; row-gap: .2rem; }
+}
+
+/* Very small phones: one action per line beats four cramped pills. */
+@media (max-width: 380px) {
+  .hero .btn-row .btn { flex: 1 1 100%; }
+  .cta-strip .btn-row .btn { flex: 1 1 100%; }
+}
+
+/* "Why choose me" reads better as reasoning-then-picture on a phone.
+   The markup puts the image first (correct for desktop's wide-left split),
+   so the order is flipped here rather than duplicating the markup. */
+@media (max-width: 859px) {
+  #why .split { display: flex; flex-direction: column; }
+  #why .split > *:first-child { order: 2; }
+  #why .split > *:last-child  { order: 1; }
+}
+
+/* ============================================================
+   BOTTOM-EDGE CHOREOGRAPHY — must stay last in the file so it
+   overrides the .wa-float / .cbot base rules declared above.
+   ============================================================ */
+@media (max-width: 700px) {
+  .wa-float { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); }
+  .cbot     { right: 16px; left: auto; bottom: calc(90px + env(safe-area-inset-bottom)); }
+  .cbot__panel { left: auto; right: 0; height: min(68vh, 480px); }
+  /* One focus at a time: WhatsApp steps aside while the chat panel is open. */
+  body.cbot-open .wa-float { opacity: 0; pointer-events: none; }
+}
+.wa-float { transition: opacity .25s var(--ease); }
+
+/* ---------- Scroll to top ----------
+   Appears only after a full viewport of scrolling, sits above both bubbles. */
+.to-top {
+  position: fixed; right: 18px; z-index: 125;
+  bottom: calc(90px + env(safe-area-inset-bottom));
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--green); color: #fff; border: 0; cursor: pointer;
+  display: grid; place-items: center;
+  box-shadow: var(--shadow-md);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s, background .2s;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--green-dark); transform: translateY(-2px); }
+.to-top svg { width: 20px; height: 20px; }
+@media (max-width: 700px) {
+  /* stacked above both bubbles on phones */
+  .to-top { bottom: calc(162px + env(safe-area-inset-bottom)); width: 44px; height: 44px; }
+  body.cbot-open .to-top { opacity: 0; pointer-events: none; }
+}
+
+/* ============================================================
+   QUIET-LUXURY LAYER
+   Presentation only. Names mirror the React brief 1:1 so the
+   plan ports directly if this ever becomes a component tree:
+     LuxurySection  -> .luxury-section
+     SectionLabel   -> .section-label
+     StatementText  -> .statement-text
+     ServicePanel   -> .service-panel
+     FullBleedMedia -> .full-bleed
+     ImagePair      -> .image-pair
+     QuoteFeature   -> .quote-feature
+     ConciergeCTA   -> .concierge
+     MediaFrame     -> .media-frame
+     SoftReveal     -> .reveal (already present, retimed below)
+   No copy, photo, link or business logic changes.
+   ============================================================ */
+
+/* --- spacing tokens (brief §18) --- */
+:root {
+  --sp-xs: 8px;  --sp-sm: 16px; --sp-md: 24px;
+  --sp-lg: 40px; --sp-xl: 64px;
+  --sp-section:   clamp(64px, 9vw, 120px);
+  --sp-sectionLg: clamp(80px, 12vw, 160px);
+  --ease-lux: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* --- LuxurySection: one rhythm for the whole page (§1) --- */
+.luxury-section { padding-block: var(--sp-section); }
+.luxury-section--lg { padding-block: var(--sp-sectionLg); }
+
+/* --- SectionLabel: tiny above huge (§13) --- */
+.section-label {
+  font-family: var(--font-head); font-size: .68rem; font-weight: 700;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 var(--sp-md);
+}
+
+/* --- StatementText: used exactly once (§8) --- */
+.statement-text {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: clamp(2rem, 5.4vw, 4.1rem);
+  line-height: 1.06; letter-spacing: -.02em;
+  max-width: 17ch; margin-inline: auto; text-align: center;
+  color: var(--green-deep);
+}
+.statement-text em { font-style: italic; color: var(--burgundy); }
+
+/* --- MediaFrame: every major image goes through this (§6) --- */
+.media-frame { overflow: hidden; border-radius: 3px; background: var(--paper-2); }
+.media-frame img { width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .8s var(--ease-lux); }
+.media-frame:hover img { transform: scale(1.025); }
+
+/* --- ServicePanel: editorial worlds, not product cards (§7) --- */
+.service-panels { display: grid; gap: 2px; }
+@media (min-width: 860px) { .service-panels { grid-template-columns: repeat(2, 1fr); } }
+.service-panel { position: relative; display: block; overflow: hidden;
+  aspect-ratio: 3/4; text-decoration: none !important; background: var(--ink); }
+@media (min-width: 860px) { .service-panel { aspect-ratio: 4/5; } }
+.service-panel img { width: 100%; height: 100%; object-fit: cover;
+  transition: transform .9s var(--ease-lux); }
+.service-panel::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(20,20,20,.05) 40%, rgba(20,20,20,.72) 100%);
+  transition: opacity .5s var(--ease-lux); }
+.service-panel:hover img { transform: scale(1.04); }
+.service-panel:hover::after { opacity: .88; }
+.service-panel__body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: clamp(1.4rem, 3vw, 2.2rem); color: #fff; }
+.service-panel__label { font-family: var(--font-head); font-size: .66rem; font-weight: 700;
+  letter-spacing: .26em; text-transform: uppercase; opacity: .8; display: block;
+  margin-bottom: .5rem; }
+.service-panel__title { font-family: var(--font-head); font-weight: 800; color: #fff;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 0 0 .4rem; line-height: 1.1; }
+.service-panel__note { margin: 0 0 .9rem; color: #efe7e7; font-size: .95rem; max-width: 34ch; }
+.service-panel__go { font-family: var(--font-head); font-size: .72rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; display: inline-flex; gap: .5rem; }
+.service-panel__go span { transition: transform .4s var(--ease-lux); }
+.service-panel:hover .service-panel__go span { transform: translateX(4px); }
+
+/* --- FullBleedMedia: used once, for contrast (§9) --- */
+.full-bleed { width: 100%; overflow: hidden; }
+.full-bleed img { width: 100%; height: clamp(320px, 52vh, 620px); object-fit: cover;
+  object-position: center 40%; display: block; }
+
+/* --- ImagePair: deliberate asymmetry (§10) --- */
+.image-pair { display: grid; gap: var(--sp-md); align-items: end; }
+@media (min-width: 860px) { .image-pair { grid-template-columns: 1.55fr 1fr; gap: var(--sp-lg); } }
+.image-pair__primary   { aspect-ratio: 4/3; }
+.image-pair__secondary { aspect-ratio: 4/5; }
+
+/* --- QuoteFeature: one quote, huge air (§14) --- */
+.quote-feature { text-align: center; max-width: 22ch; margin-inline: auto; }
+.quote-feature blockquote {
+  font-family: var(--font-head); font-weight: 800; letter-spacing: -.015em;
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem); line-height: 1.18;
+  margin: 0 0 var(--sp-md); color: var(--ink);
+}
+.quote-feature cite { font-style: normal; font-size: .8rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted); }
+
+/* --- ConciergeCTA: not a normal contact block (§15) --- */
+.concierge { display: grid; gap: var(--sp-lg); align-items: center; }
+@media (min-width: 860px) { .concierge { grid-template-columns: 1fr auto; } }
+.concierge h2 { font-size: clamp(1.8rem, 4vw, 2.9rem); margin: 0 0 var(--sp-sm); }
+.concierge p { margin: 0; color: var(--muted); max-width: 44ch; }
+
+/* --- SoftReveal: one motion system (§11) --- */
+.reveal { transition: opacity .78s var(--ease-lux), transform .78s var(--ease-lux); }
+
+/* Secondary reviews sit beneath the featured quote — present, not competing. */
+.quote-rail { display: grid; gap: var(--sp-md); max-width: 62ch; margin: var(--sp-xl) auto 0; }
+@media (min-width: 760px) { .quote-rail { grid-template-columns: 1fr 1fr; gap: var(--sp-lg); } }
+.quote-rail p { margin: 0; font-size: .95rem; color: var(--ink-soft); line-height: 1.6;
+  padding-left: var(--sp-sm); border-left: 2px solid var(--sage); }
+.quote-rail span { display: block; margin-top: .5rem; font-size: .72rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted); }
+
+/* --- StatementText over FullBleedMedia (§8 + §9 combined) ---
+   Phone-first: the two are separate blocks, exactly as before. The overlay
+   only engages once there is enough width for the photo's blurred left region
+   to survive the crop. */
+.statement-bleed__media { overflow: hidden; }
+.statement-bleed__media img {
+  width: 100%; height: clamp(300px, 46vh, 560px);
+  object-fit: cover; object-position: 70% 45%;   /* keep the dancers, not the blur */
+  display: block;
+}
+.statement-bleed__text {
+  padding-block: var(--sp-sectionLg);
+  padding-inline: var(--gutter);
+}
+
+@media (min-width: 861px) {
+  .statement-bleed { position: relative; }
+  .statement-bleed__media img {
+    height: clamp(460px, 64vh, 720px);
+    object-position: center 42%;                 /* blurred region back in frame */
+  }
+  /* Guarantee contrast over the blur without an obvious "gradient" band. */
+  .statement-bleed__media::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg,
+      rgba(18,18,18,.72) 0%, rgba(30,16,20,.52) 26%,
+      rgba(30,16,20,.16) 44%, rgba(20,20,20,0) 58%);
+  }
+  .statement-bleed__text {
+    position: absolute; inset-block: 0; inset-inline-start: 0;
+    width: min(40%, 600px);
+    display: grid; align-content: center;
+    margin: 0; padding-inline: clamp(1.8rem, 4vw, 4.5rem);
+    text-align: left; color: #fff;
+    max-width: none;
+    /* The sharp photo begins at 39.1% of the composition. Overlay type is
+       sized so the longest line ("No empty dancefloor.") lands inside that
+       blurred band at every width — the display clamp overflowed it by
+       17-23px between 900 and 1200px. */
+    font-size: clamp(1.6rem, 3.6vw, 3.4rem);
+  }
+  .statement-bleed__text em { color: var(--sage); }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Schuggies-Ceilidhs",
+  "short_name": "Schuggies",
+  "description": "Authentic Scottish ceilidh entertainment for weddings and parties, UK-wide including the Channel Islands.",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "/",
+  "theme_color": "#702331",
+  "background_color": "#faf7f3",
+  "display": "standalone"
+}

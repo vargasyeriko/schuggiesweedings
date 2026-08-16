@@ -1,0 +1,15 @@
+# Python virtualenv — recreate with `python3 -m venv .venv`
+.venv/
+__pycache__/
+*.pyc
+
+# tryon.py health-tick log, grows unbounded
+tryon.log
+
+# The 256MB archive of the old WordPress site lives one level up
+# (../_ARCHIVE_original). It is a one-off backup, not source — keep it
+# out of git history. Rebuild any time with ../archive_original.py
+_ARCHIVE_original/
+
+# macOS
+.DS_Store
