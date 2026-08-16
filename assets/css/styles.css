@@ -554,9 +554,13 @@ body.no-scroll { overflow: hidden; }
    room for the WhatsApp + chat floats so they never sit over footer links.
    (This is the authoritative .site-footer rule — an earlier padding-bottom was
    being silently overridden by the padding-block shorthand here.) */
+/* The floats are fixed to the viewport, so at the very bottom of the page they
+   land on whatever the footer's last row is. That was the Privacy/Terms bar —
+   both links were unclickable on every page. The reserve applies on desktop
+   too, not just phones. */
 .site-footer {
   background: var(--ink); color:#cfc7c5; font-size:.92rem;
-  padding-block: clamp(2.5rem,7vw,4rem) max(2rem, calc(env(safe-area-inset-bottom) + 1.5rem));
+  padding-block: clamp(2.5rem,7vw,4rem) max(5.5rem, calc(env(safe-area-inset-bottom) + 5rem));
 }
 @media (max-width: 700px) {
   .site-footer { padding-bottom: max(6.5rem, calc(env(safe-area-inset-bottom) + 6rem)); }
@@ -683,6 +687,11 @@ body.no-scroll { overflow: hidden; }
   transition: opacity .25s var(--ease), transform .25s var(--ease);
 }
 .cbot__panel.is-open { opacity: 1; transform: none; }
+/* `display: flex` above beats the [hidden] attribute's `display: none`, so the
+   closed panel stayed in the layout: invisible at opacity 0 but still hit-
+   testable, a ~353x510 rectangle swallowing every click behind it (this is
+   what stopped the footer social links working). Restore hidden's intent. */
+.cbot__panel[hidden] { display: none; }
 .cbot__head {
   display: flex; align-items: center; gap: .7rem; padding: .9rem 1rem;
   background: var(--burgundy); color: #fff;
