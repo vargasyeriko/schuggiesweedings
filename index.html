@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?b=38">
+  <link rel="stylesheet" href="assets/css/styles.css?b=40">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,18 +58,21 @@
   <!-- HERO -->
   <section class="hero grain">
     <div class="hero__media">
-      <!-- Source photos are 1080x1080, so nothing here is upscaled: phones get
-           the full square frame (most pixels for a tall viewport), wider screens
-           get the wide composition. WebP first, JPG fallback. -->
+      <!-- The source photo is a tight square two-shot, so a plain 16:9 crop of it
+           put both faces directly under the headline. The wide asset is composed
+           instead: the photo held to the right half where no copy sits, over a
+           blurred, darkened blow-up of itself carrying the room's colour across
+           the left. The scrim hides the join. Phones get the untouched square. -->
       <picture>
-        <source media="(max-width: 700px)" type="image/webp" srcset="assets/images/hero-ceilidh-joy-square.webp">
-        <source media="(max-width: 700px)" type="image/jpeg" srcset="assets/images/hero-ceilidh-joy-square.jpg">
+        <source media="(max-width: 700px)" type="image/webp" srcset="assets/images/hero-ceilidh-chandelier-square.webp">
+        <source media="(max-width: 700px)" type="image/jpeg" srcset="assets/images/hero-ceilidh-chandelier-square.jpg">
         <source type="image/webp"
-                srcset="assets/images/hero-ceilidh-joy-1280.webp 1280w,
-                        assets/images/hero-ceilidh-joy-2400.webp 2400w"
+                srcset="assets/images/hero-ceilidh-chandelier-wide-1800.webp 1800w,
+                        assets/images/hero-ceilidh-chandelier-wide-2560.webp 2560w"
                 sizes="100vw">
-        <img src="assets/images/hero-ceilidh-joy-1600.jpg" width="1600" height="900" fetchpriority="high"
-             alt="Two wedding guests bursting through an arch of raised hands mid-ceilidh, both laughing, the floor packed behind them">
+        <img class="hero__img--composed" src="assets/images/hero-ceilidh-chandelier-wide-1800.jpg"
+             width="1800" height="900" fetchpriority="high"
+             alt="A couple dancing a ceilidh under a chandelier, hands joined, with a kilted caller on the microphone behind them">
       </picture>
     </div>
     <div class="container hero__inner">
@@ -307,6 +310,6 @@
   </section>
 
   <div id="site-footer-mount"></div>
-  <script src="assets/js/main.js?b=38"></script>
+  <script src="assets/js/main.js?b=40"></script>
 </body>
 </html>

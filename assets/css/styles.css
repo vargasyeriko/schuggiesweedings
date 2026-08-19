@@ -426,6 +426,10 @@ body.no-scroll { overflow: hidden; }
     linear-gradient(180deg, rgba(20,20,20,.28) 0%, rgba(20,20,20,0) 30%, rgba(20,20,20,0) 62%, rgba(20,20,20,.62) 100%);
 }
 .hero__media .placeholder-img { height: 100%; border-radius: 0; }
+/* A pre-composed hero (subject already placed in frame) must not be re-biased
+   by the 38% rule above — that rule exists to rescue square photos dropped
+   into a wide box, which is the problem composing already solved. */
+.hero__media img.hero__img--composed { object-position: center center; }
 .hero__inner { position: relative; z-index: 1; padding-block: clamp(3rem,10vw,5rem); max-width: 760px; }
 .hero h1 { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.3); }
 .hero p.lead { font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: #f7efef; max-width: 42ch; }
