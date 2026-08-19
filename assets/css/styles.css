@@ -539,6 +539,20 @@ body.no-scroll { overflow: hidden; }
 .acc__a { max-height:0; overflow:hidden; transition: max-height .35s var(--ease); }
 .acc__a-inner { padding: 0 1.3rem 1.2rem; color: var(--muted); }
 
+/* Ceilidh Club dates. The accordion is the FAQ one — a month is the group
+   heading, a date is the question, the event detail is the answer. The date
+   needs to win over the theme tag beside it, hence the two spans rather than
+   one run of text. */
+.event-when { font-weight: 700; }
+.event-theme {
+  display: inline-block; margin-left: .6rem; padding: .15rem .55rem;
+  border-radius: 999px; background: var(--sage); color: var(--ink);
+  font-size: .68rem; letter-spacing: .04em; text-transform: uppercase;
+  vertical-align: middle;
+}
+.event-venue { font-weight: 600; color: var(--ink); margin-bottom: .5rem; }
+.dates-note { font-size: .95rem; color: var(--muted); margin-top: 1rem; }
+
 /* Forms */
 .form { display:grid; gap:1rem; }
 .field { display:grid; gap:.4rem; }
