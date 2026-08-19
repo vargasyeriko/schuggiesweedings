@@ -1,0 +1,127 @@
+SCHUGGIE'S CEILIDHS — CONFIGURATION RECEIPT EXPORT
+=================================================
+
+Status: AGREED_AND_SENT
+Agreed: YES
+Collected: 2026-08-19T17:00:58.435Z
+
+RECEIPT PROOF
+  Configuration ID: SC-2026-AC4616E2
+  Receipt ID:       SC-2026-AC4616E2-R1
+  Terms version:    2026.08
+  PDF version:      1.14-blend59
+  Generated:        2026-08-19T17:00:58.401Z
+  Acknowledged:     2026-08-19T17:00:58.401Z
+  Accepted:         2026-08-19T17:00:58.401Z
+  SHA-256:          0a9b7162bce1e2bff9ea5ac8e58602ad9ab286f42430cab5c6263cb3bc9983b8
+  PDF file:         SC-2026-AC4616E2-R1_2026-08-19.pdf
+  Ack config:       true
+  Ack framework:    true
+
+SCOPE
+  01 Chat:            L3 — Conversation flow
+  02 Knowledge:       L3 — AI consultant — context-aware
+  03 Next step:       L3 — Guided booking journey
+  04 Page control:    C — Full page editor
+  05 Support:         C — 12-month guidance · 36h
+
+HOURS (internal)
+  RAG build:            240h
+  Page editor install:  18h
+  Support / training:   36h
+  Total estimated:      294h
+
+COMMERCIAL FRAMEWORK
+  Minimum engagement:   $30000
+  Early close-out:      $12000
+  Billing:              Weekly
+  Invoice due:          3 calendar days
+  Initial cancel:       Days 1-7
+  Est. scope value:     $61,740
+  Math:                 294h × $210/hr → $61,740, floored at minimum $30,000
+
+--- JSON ---
+{
+  "client_project": "Schuggie's Ceilidhs — wedding infrastructure chatbot",
+  "model": "receipt_before_submit_v1",
+  "status": "AGREED_AND_SENT",
+  "agreed": true,
+  "acknowledgments": {
+    "configuration_matches_selections": true,
+    "reviewed_framework_billing_closeout": true
+  },
+  "section_01_chat": {
+    "level": 3,
+    "label": "Conversation flow",
+    "short": "Conversation flow",
+    "hours": 48
+  },
+  "section_02_rag": {
+    "level": 3,
+    "label": "AI consultant — context-aware",
+    "short": "AI consultant",
+    "hours": 66
+  },
+  "section_03_recommendations": {
+    "level": 3,
+    "label": "Guided booking journey",
+    "short": "Guided booking journey",
+    "hours": 54
+  },
+  "section_04_page_editor": {
+    "level": 3,
+    "letter": "C",
+    "label": "Full page editor",
+    "short": "Full page",
+    "hours": 18,
+    "scope": "website_page_only_not_rag_knowledge"
+  },
+  "section_05_support": {
+    "level": 3,
+    "letter": "C",
+    "label": "12-month guidance",
+    "short": "12-month guidance",
+    "hours": 36
+  },
+  "hours": {
+    "rag_build": 240,
+    "page_editor_install": 18,
+    "support_training": 36,
+    "page_ui_and_training": 54,
+    "total_estimated": 294
+  },
+  "commercial_framework": {
+    "currency": "USD",
+    "minimum_engagement_usd": 30000,
+    "early_project_closeout_usd": 12000,
+    "billing_cadence": "Weekly",
+    "invoice_payment_period_days": 3,
+    "initial_cancellation_days": 7,
+    "terms_version": "2026.08",
+    "hourly_reference_usd": 210,
+    "estimated_scope_value_usd": 61740,
+    "estimated_scope_formula": "294h × $210/hr → $61,740, floored at minimum $30,000",
+    "note": "Configurations exceeding the minimum project framework may result in a higher overall project value according to the selected scope and completed work."
+  },
+  "build_depth_score": 15,
+  "build_depth_band": "HIGH",
+  "knowledge_files": [
+    "schuggies_faqs.md",
+    "schuggies_resources_links.md",
+    "terms_and_conditions.html"
+  ],
+  "collected_at": "2026-08-19T17:00:58.435Z",
+  "receipt": {
+    "configuration_id": "SC-2026-AC4616E2",
+    "receipt_id": "SC-2026-AC4616E2-R1",
+    "pdf_version": "1.14-blend59",
+    "terms_version": "2026.08",
+    "generated_at": "2026-08-19T17:00:58.401Z",
+    "presented_at": "2026-08-19T17:00:58.401Z",
+    "acknowledged_at": "2026-08-19T17:00:58.401Z",
+    "submitted_at": "2026-08-19T17:00:58.401Z",
+    "sha256": "0a9b7162bce1e2bff9ea5ac8e58602ad9ab286f42430cab5c6263cb3bc9983b8",
+    "filename": "SC-2026-AC4616E2-R1_2026-08-19.pdf"
+  },
+  "sent_at": "2026-08-19T17:00:58.401Z"
+}

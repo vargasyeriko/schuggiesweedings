@@ -410,7 +410,22 @@ body.no-scroll { overflow: hidden; }
    upscale, which is exactly what reads as "pixelly". 62vh cuts that to ~1.4x. */
 @media (max-width: 700px) {
   .hero { min-height: clamp(440px, 62vh, 560px); }
-  .hero__media img { object-position: center 32%; }
+  /* A square photo in a portrait box is height-limited, so `cover` crops
+     horizontally and the vertical value here has no slack to work with. The
+     axis that actually does something on a phone is X. */
+  .hero__media img { object-position: 58% center; }
+  /* Four CTAs at 390px wrapped into a ragged 1-line/2-line/2-line/1-line
+     block. A 2x2 grid gives equal widths and equal heights, and every target
+     clears the 44px minimum. */
+  .hero .btn-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero .btn-row .btn { width: 100%; justify-content: center; text-align: center; }
+  /* The copy runs the full height of a phone hero, so it is always over the
+     photo. Weight the scrim vertically here rather than left, which is what
+     the desktop composition needs. */
+  .hero__media::after {
+    background:
+      linear-gradient(180deg, rgba(18,18,18,.86) 0%, rgba(45,20,26,.72) 38%, rgba(20,20,20,.62) 70%, rgba(20,20,20,.84) 100%);
+  }
 }
 .hero__media { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
 /* Square source, wide frame — bias the crop upward so faces survive instead of

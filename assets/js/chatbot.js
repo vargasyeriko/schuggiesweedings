@@ -27,7 +27,7 @@
   // ---- Built-in FAQ brain (keyword-matched) ----
   var KB = [
     { keys: ["price","cost","how much","expensive","fee","quote","budget","£","pound"],
-      a: "Here's the guide pricing (locked until 2028):\n• Ceilidh DJ set — from £877 (most popular)\n• Live ceilidh band — from £1,597\n• The Whole of the Moon — from £4,927\nGuide prices are for the East Midlands; a little extra for travel beyond. Want a proper quote? " + CONTACT },
+      a: "Here's the guide pricing (locked until 2028):\n• Ceilidh DJ set — from £877 (most popular)\n• Live ceilidh band — from £1,597\n• The Whole of the Moon — from £4,927\nGuide prices are for the East Midlands (NG, LE and DE postcodes); a little extra for travel beyond. Want a proper quote? " + CONTACT },
     { keys: ["package","included","what do i get","what's included","offer","options"],
       a: "Three flexible packages, every dance called:\n1) Ceilidh-DJ set (from £877) — recorded music, PA & mic for speeches, optional end-of-night disco.\n2) Ceilidh & Disco live band (from £1,597) — my signature experience with a live band.\n3) The Whole of the Moon (from £4,927) — all the unique extras." },
     { keys: ["first dance"],
@@ -37,7 +37,7 @@
     { keys: ["space","venue","room","hall","fit","big","small","how much room"],
       a: "Any size works — a cosy village hall, a marquee, a garden, an odd-shaped hotel room or a grand castle hall. Don't let venue size put you off; I've enough experience to make them all work." },
     { keys: ["travel","cover","area","distance","come to","where are you","uk","far","location"],
-      a: "I cover the whole UK, including the Channel Islands. Travel within the East Midlands (NG, DE, LE postcodes) is included; beyond that it's £0.55/mile plus £20/hour travel time — and I often work with local musicians to keep costs down.\nWant to lock it in? Check availability or book a chat." },
+      a: "I cover the whole UK, including the Channel Islands. Travel within the East Midlands (NG, LE and DE postcodes) is included; beyond that it's £0.55/mile plus £20/hour travel time — and I often work with local musicians to keep costs down.\nWant to lock it in? Check availability or book a chat." },
     { keys: ["outdoor","outside","open air","open-air","garden","marquee","field","forest"],
       a: "Yes — all my packages work outdoors (open-air). I've done loads over the years; we just always keep a wet-weather plan in the back pocket." },
     { keys: ["sound limit","decibel","db","noise","volume","loud"],

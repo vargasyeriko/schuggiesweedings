@@ -119,6 +119,50 @@ new URL. It matters when you overwrite a file that keeps its name.
 Railway auto-deploys from GitHub `main`. `git push` and it is live in about 30
 seconds. There is no build step.
 
+## Checking on a phone
+
+Every change gets checked at phone width before it ships. Chrome's `resize_window`
+is unreliable here, so use an iframe instead — **media queries inside an iframe key
+off the iframe's width**, so a 390px iframe is a real phone-width render, not a
+scaled-down screenshot.
+
+Create `_phone.html` in the site root (it is gitignored — the repo root is the web
+root, so committing it would publish it):
+
+```html
+<!doctype html><meta charset="utf-8"><title>phone preview</title>
+<style>body{margin:0;background:#333;display:flex;gap:18px;padding:18px;
+font:12px system-ui;color:#fff}iframe{width:390px;height:844px;border:0;background:#fff}</style>
+<script>
+  const pages = (new URLSearchParams(location.search).get('p') || 'index.html').split(',');
+  const y = new URLSearchParams(location.search).get('y') || 0;
+  document.write(pages.map(p => `<figure><figcaption>${p} @390</figcaption>`
+    + `<iframe src="/${p}" onload="this.contentWindow.scrollTo(0,${y})"></iframe></figure>`).join(''));
+</script>
+```
+
+Then `python3 -m http.server 8188` and open:
+
+```
+localhost:8188/_phone.html?p=index.html,pages/prices.html,pages/faqs.html&y=800
+```
+
+What to check on each page — run this in the console of the harness page:
+
+```js
+[...document.querySelectorAll("iframe")].map(f => {
+  const d = f.contentDocument, de = d.documentElement;
+  return { page: f.src,
+    overflows: de.scrollWidth > de.clientWidth,          // must be false
+    tinyTaps: [...d.querySelectorAll("a.btn,button")]
+      .filter(e => { const h = e.getBoundingClientRect().height; return h > 0 && h < 44; }).length };
+});
+```
+
+`overflows: true` means something is pushing the page sideways — the single most
+common phone bug. Ignore `.mobile-nav` sitting past the right edge; that is the
+closed drawer and is meant to be off-canvas.
+
 ## TODO before going live
 
 - [ ] Swap placeholder image blocks for real photos (logo, hero, gallery, Schuggie portrait).

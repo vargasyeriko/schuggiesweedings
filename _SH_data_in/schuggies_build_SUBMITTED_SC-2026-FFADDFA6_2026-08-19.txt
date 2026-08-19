@@ -1,0 +1,127 @@
+SCHUGGIE'S CEILIDHS — CONFIGURATION RECEIPT EXPORT
+=================================================
+
+Status: AGREED_AND_SENT
+Agreed: YES
+Collected: 2026-08-19T16:11:30.546Z
+
+RECEIPT PROOF
+  Configuration ID: SC-2026-FFADDFA6
+  Receipt ID:       SC-2026-FFADDFA6-R1
+  Terms version:    2026.08
+  PDF version:      1.14-blend59
+  Generated:        2026-08-19T16:11:30.515Z
+  Acknowledged:     2026-08-19T16:11:30.515Z
+  Accepted:         2026-08-19T16:11:30.515Z
+  SHA-256:          807cbaca5b517c387ee7a3b14cca1a1d7e41c048370ff0e7402f867854f9e356
+  PDF file:         SC-2026-FFADDFA6-R1_2026-08-19.pdf
+  Ack config:       true
+  Ack framework:    true
+
+SCOPE
+  01 Chat:            L1 — Guided — buttons & menus
+  02 Knowledge:       L1 — Essential knowledge — FAQs only
+  03 Next step:       L1 — Helpful links
+  04 Page control:    A — Quick content editor
+  05 Support:         A — 3-day handoff · 12h
+
+HOURS (internal)
+  RAG build:            128h
+  Page editor install:  6h
+  Support / training:   12h
+  Total estimated:      146h
+
+COMMERCIAL FRAMEWORK
+  Minimum engagement:   $30000
+  Early close-out:      $12000
+  Billing:              Weekly
+  Invoice due:          3 calendar days
+  Initial cancel:       Days 1-7
+  Est. scope value:     $30,660
+  Math:                 146h × $210/hr → $30,660, floored at minimum $30,000
+
+--- JSON ---
+{
+  "client_project": "Schuggie's Ceilidhs — wedding infrastructure chatbot",
+  "model": "receipt_before_submit_v1",
+  "status": "AGREED_AND_SENT",
+  "agreed": true,
+  "acknowledgments": {
+    "configuration_matches_selections": true,
+    "reviewed_framework_billing_closeout": true
+  },
+  "section_01_chat": {
+    "level": 1,
+    "label": "Guided — buttons & menus",
+    "short": "Guided",
+    "hours": 16
+  },
+  "section_02_rag": {
+    "level": 1,
+    "label": "Essential knowledge — FAQs only",
+    "short": "Essential knowledge",
+    "hours": 22
+  },
+  "section_03_recommendations": {
+    "level": 1,
+    "label": "Helpful links",
+    "short": "Helpful links",
+    "hours": 18
+  },
+  "section_04_page_editor": {
+    "level": 1,
+    "letter": "A",
+    "label": "Quick content editor",
+    "short": "Content",
+    "hours": 6,
+    "scope": "website_page_only_not_rag_knowledge"
+  },
+  "section_05_support": {
+    "level": 1,
+    "letter": "A",
+    "label": "3-day handoff",
+    "short": "3-day handoff",
+    "hours": 12
+  },
+  "hours": {
+    "rag_build": 128,
+    "page_editor_install": 6,
+    "support_training": 12,
+    "page_ui_and_training": 18,
+    "total_estimated": 146
+  },
+  "commercial_framework": {
+    "currency": "USD",
+    "minimum_engagement_usd": 30000,
+    "early_project_closeout_usd": 12000,
+    "billing_cadence": "Weekly",
+    "invoice_payment_period_days": 3,
+    "initial_cancellation_days": 7,
+    "terms_version": "2026.08",
+    "hourly_reference_usd": 210,
+    "estimated_scope_value_usd": 30660,
+    "estimated_scope_formula": "146h × $210/hr → $30,660, floored at minimum $30,000",
+    "note": "Configurations exceeding the minimum project framework may result in a higher overall project value according to the selected scope and completed work."
+  },
+  "build_depth_score": 5,
+  "build_depth_band": "LOW",
+  "knowledge_files": [
+    "schuggies_faqs.md",
+    "schuggies_resources_links.md",
+    "terms_and_conditions.html"
+  ],
+  "collected_at": "2026-08-19T16:11:30.546Z",
+  "receipt": {
+    "configuration_id": "SC-2026-FFADDFA6",
+    "receipt_id": "SC-2026-FFADDFA6-R1",
+    "pdf_version": "1.14-blend59",
+    "terms_version": "2026.08",
+    "generated_at": "2026-08-19T16:11:30.515Z",
+    "presented_at": "2026-08-19T16:11:30.515Z",
+    "acknowledged_at": "2026-08-19T16:11:30.515Z",
+    "submitted_at": "2026-08-19T16:11:30.515Z",
+    "sha256": "807cbaca5b517c387ee7a3b14cca1a1d7e41c048370ff0e7402f867854f9e356",
+    "filename": "SC-2026-FFADDFA6-R1_2026-08-19.pdf"
+  },
+  "sent_at": "2026-08-19T16:11:30.515Z"
+}

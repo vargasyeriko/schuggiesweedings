@@ -13,3 +13,7 @@ _ARCHIVE_original/
 
 # macOS
 .DS_Store
+
+# Local phone-preview harness. The repo root is the web root, so committing
+# this would publish a dev tool at /_phone.html. Recreate it from the README.
+_phone.html
