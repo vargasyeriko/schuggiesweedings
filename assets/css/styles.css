@@ -358,7 +358,12 @@ p  { margin: 0 0 1rem; }
    Book a Chat lozenge that used to sit at the end of this row is gone, which
    is what buys the two long labels their space. */
 @media (min-width: 1000px) {
-  .nav__links { display: flex; align-items: center; flex: 0 1 auto; min-width: 0;
+  /* flex: 1 makes the links take every pixel left over after the brand, so
+     justify-content: center sits them in the middle of that space. Without
+     the grow they hug the right edge, which is how they looked once the
+     Book a Chat lozenge was removed from the end of the row. */
+  .nav__links { display: flex; align-items: center; flex: 1 1 auto; min-width: 0;
+                justify-content: center;
                 gap: clamp(.5rem, 0.95vw, 1.05rem); }
   .nav__links a { white-space: nowrap; font-size: .73rem; letter-spacing: .02em; padding-inline: 0; }
   .nav__toggle { display: none; }
