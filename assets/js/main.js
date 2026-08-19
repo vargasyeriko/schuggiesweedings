@@ -41,18 +41,19 @@
 
   // Nav definition. `href` is relative; `base` prefix handles pages/ subfolder.
   // `ext: true` marks an off-site link (absolute URL, opens in a new tab).
-  // Order follows the client brief. Corporate and About sit in the footer
-  // rather than the primary nav — still reachable, just not competing with
-  // the weddings/parties story.
+  // Five items, per the client's revision: the top line is now the five pages
+  // he wants sold hardest. Everything dropped from here (Parties, FAQs,
+  // Availability, Contact, About, Corporate) is still in the footer, so no
+  // page became unreachable — check the footer lists before removing more.
+  // "Nottingham Ceilidh Club" is public-ceilidhs.html and "Free Wedding
+  // Toolkit" is guides.html; both are the client's names for those pages,
+  // not new pages.
   var NAV = [
-    { label: "Home",            href: "index.html" },
-    { label: "Prices",          href: "pages/prices.html" },
-    { label: "Weddings",        href: "pages/weddings.html" },
-    { label: "Parties",         href: "pages/parties.html" },
-    { label: "Availability",    href: SITE.calendlyAvail, ext: true },
-    { label: "FAQs",            href: "pages/faqs.html" },
-    { label: "Public Ceilidhs", href: "pages/public-ceilidhs.html" },
-    { label: "Contact",         href: "pages/contact.html" }
+    { label: "Home",                    href: "index.html" },
+    { label: "Prices",                  href: "pages/prices.html" },
+    { label: "Weddings",                href: "pages/weddings.html" },
+    { label: "Nottingham Ceilidh Club", href: "pages/public-ceilidhs.html" },
+    { label: "Free Wedding Toolkit",    href: "pages/guides.html" }
   ];
 
   // How deep below the site root are we? Blog posts live at
@@ -130,7 +131,11 @@
         '<span class="brand__text">Schuggies-Ceilidhs<small>Scottish Ceilidh Entertainment</small></span>' +
       '</a>' +
       '<div class="nav__links">'+links+'</div>' +
-      '<a class="btn btn--chat nav__cta" href="'+SITE.calendlyChat+'" target="_blank" rel="noopener">Book a Chat</a>' +
+      // No Book a Chat lozenge on the desktop row — removed at the client's
+      // request to give the five labels room. The mobile drawer keeps its
+      // Book a Chat button (no width pressure there, and it is the only
+      // booking CTA above the fold on a phone). Calendly is still reached
+      // from the footer's "More info" list and the Check Availability button.
       '<button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>' +
     '</nav></div></header>' +
     '<div class="scrim" data-close-nav></div>' +

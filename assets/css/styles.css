@@ -318,7 +318,6 @@ p  { margin: 0 0 1rem; }
   gap: clamp(.6rem, 1.2vw, 1rem); padding-block: .7rem; min-height: 64px;
 }
 .nav > .brand { flex: 0 0 auto; min-width: 0; }
-.nav > .nav__cta { flex: 0 0 auto; }
 .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none !important; }
 /* Mascot logo. Transparent PNG, so no plate or radius behind it — it sits
    straight on the header. Height-driven; width follows the 1.14:1 artwork. */
@@ -342,7 +341,6 @@ p  { margin: 0 0 1rem; }
 .nav__links a:hover, .nav__links a[aria-current="page"] { text-decoration: none; }
 .nav__links a:hover::after, .nav__links a[aria-current="page"]::after { transform: scaleX(1); }
 
-.nav__cta { display: none; }
 
 .nav__toggle {
   display: inline-flex; flex-direction: column; gap: 5px; justify-content: center;
@@ -354,15 +352,15 @@ p  { margin: 0 0 1rem; }
 .nav__toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
 .nav__toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7.5px) rotate(-45deg); }
 
-/* The brief's nav is 8 items. Rather than delay the horizontal bar to a width
-   where it fits comfortably (which hid the nav on ordinary laptop windows),
-   the bar appears at 1000px as before and the row is made to fit: labels never
-   wrap, and the brand gives up space before the nav does. */
+/* The nav is 5 items, two of them long ("Nottingham Ceilidh Club", "Free
+   Wedding Toolkit"). The bar appears at 1000px and the row is made to fit:
+   labels never wrap, and the brand gives up space before the nav does. The
+   Book a Chat lozenge that used to sit at the end of this row is gone, which
+   is what buys the two long labels their space. */
 @media (min-width: 1000px) {
   .nav__links { display: flex; align-items: center; flex: 0 1 auto; min-width: 0;
                 gap: clamp(.5rem, 0.95vw, 1.05rem); }
   .nav__links a { white-space: nowrap; font-size: .73rem; letter-spacing: .02em; padding-inline: 0; }
-  .nav__cta { display: inline-flex; white-space: nowrap; font-size: .74rem; padding: .85rem 1.15rem; }
   .nav__toggle { display: none; }
 }
 /* Below ~1120px the container is narrower than its 1180px cap, so the row
