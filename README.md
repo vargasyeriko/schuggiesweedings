@@ -54,6 +54,71 @@ python3 -m http.server 8177
 - **Colours / fonts / spacing** → `:root` variables at the top of `assets/css/styles.css`.
 - **Real photos** → replace the `.placeholder-img` blocks with `<img>` tags pointing at `assets/images/…`. Each placeholder's caption says which photo goes there.
 
+## Changing images
+
+All images live in `assets/images/`. Nothing is fetched from WordPress or any CDN —
+if a file is not in that folder, it does not appear on the site.
+
+### Where each page's hero is set
+
+There is no central image config. Each page holds its own hero in its own HTML:
+
+| Page | Hero file |
+|------|-----------|
+| `index.html` | `hero-ceilidh-chandelier-wide-1800.jpg` (+ square, + webp) |
+| `pages/weddings.html` | `hero-weddings-1600.jpg` |
+| `pages/parties.html` | `hero-parties-1600.jpg` |
+| `pages/corporate.html` | `corporate-marquee.webp` |
+| `pages/about.html` | `schuggie-quaich.webp` |
+| `pages/public-ceilidhs.html` | `public-ceilidh-hall.webp` |
+
+The **logo** is the exception — it is in `assets/js/main.js` (`buildHeader` and
+`buildFooter`), so changing it there updates the header and footer on all 79 pages
+at once.
+
+### Swapping one hero
+
+1. Put the new photo in `assets/images/`.
+2. In that page, find the `<div class="hero__media">` block and point the
+   `<picture>` sources and the `<img src>` at the new filenames.
+3. Update the `alt` text. It describes the photo to screen readers and to Google —
+   a stale `alt` is worse than none.
+4. **Bump the `?b=` number** (see below) or nobody sees the change.
+
+### Sizes to generate
+
+Each hero wants a square for phones and a wide version for everything else,
+in WebP with a JPG fallback. From a square source:
+
+```
+square   1080x1080   .webp + .jpg      phones (max-width: 700px)
+wide     1800x900    .webp + .jpg      desktop
+wide     2560x1280   .webp             retina desktop
+```
+
+Do not generate above ~1.5x the source's real pixels. Blowing a 1080px photo up
+to 2400 adds bytes and no detail.
+
+### The `?b=` cache-buster — the step people forget
+
+Every page links `styles.css?b=NN` and `main.js?b=NN`. Cloudflare caches assets for
+four hours, so **after any change to CSS, JS or an image, bump that number across
+every page** or the old version keeps being served:
+
+```bash
+# from the site root — replace 40 with the current number, 41 with the next
+grep -rlE '(styles\.css|main\.js)\?b=40' index.html pages/ \
+  | xargs sed -i '' -E 's/(styles\.css|main\.js)\?b=40/\1?b=41/g'
+```
+
+Images referenced by a *new filename* do not need this — a new name is already a
+new URL. It matters when you overwrite a file that keeps its name.
+
+### Deploying
+
+Railway auto-deploys from GitHub `main`. `git push` and it is live in about 30
+seconds. There is no build step.
+
 ## TODO before going live
 
 - [ ] Swap placeholder image blocks for real photos (logo, hero, gallery, Schuggie portrait).
