@@ -12,19 +12,23 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/css/styles.css?b=42"></head>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/css/styles.css?b=43"></head>
 <body><div id="site-header-mount"></div>
 
   <section class="hero grain hero--short">
+    <!-- Composed like the homepage hero: the photo held to the right where no
+         copy sits, over a blurred, darkened blow-up of itself. A straight 16:9
+         crop of this square put the bride's face behind the headline. -->
     <div class="hero__media"><picture>
-        <source media="(max-width: 700px)" type="image/webp" srcset="../assets/images/hero-weddings-square.webp">
-        <source media="(max-width: 700px)" type="image/jpeg" srcset="../assets/images/hero-weddings-square.jpg">
+        <source media="(max-width: 700px)" type="image/webp" srcset="../assets/images/hero-bride-cheer-square.webp">
+        <source media="(max-width: 700px)" type="image/jpeg" srcset="../assets/images/hero-bride-cheer-square.jpg">
         <source type="image/webp"
-                srcset="../assets/images/hero-weddings-1280.webp 1280w,
-                        ../assets/images/hero-weddings-2400.webp 2400w"
+                srcset="../assets/images/hero-bride-cheer-wide-1800.webp 1800w,
+                        ../assets/images/hero-bride-cheer-wide-2560.webp 2560w"
                 sizes="100vw">
-        <img src="../assets/images/hero-weddings-1600.jpg" width="1600" height="900" fetchpriority="high"
-             alt="A couple ducking through an arch of raised hands during a ceilidh dance at their wedding">
+        <img class="hero__img--composed" src="../assets/images/hero-bride-cheer-wide-1800.jpg"
+             width="1800" height="900" fetchpriority="high"
+             alt="A bride throwing both arms in the air mid-celebration, guests and a kilted guest behind her">
       </picture></div>
     <div class="container hero__inner">
       <p class="eyebrow eyebrow--sage">Weddings</p>
@@ -67,6 +71,6 @@
   </div></div></section>
 
   <div id="site-footer-mount"></div>
-  <script src="../assets/js/main.js?b=42"></script>
+  <script src="../assets/js/main.js?b=43"></script>
 </body>
 </html>
