@@ -277,7 +277,6 @@ p  { margin: 0 0 1rem; }
 @media (max-width: 900px) {
   .topbar__item { min-height: 44px; padding-block: .5rem; }
   .topbar .container { padding-block: .2rem; }
-  .footer-links a { display: inline-block; padding-block: .55rem; min-height: 44px; }
   .social-row a { min-width: 44px; min-height: 44px; display: inline-grid; place-items: center; }
   .mobile-nav a { min-height: 44px; display: flex; align-items: center; }
   /* Privacy · Terms in the footer bottom bar */
@@ -644,7 +643,7 @@ body.no-scroll { overflow: hidden; }
 @media (max-width: 700px) {
   .site-footer { padding-bottom: max(6.5rem, calc(env(safe-area-inset-bottom) + 6rem)); }
 }
-.site-footer h4 { color:#fff; font-size:.85rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:1rem; }
+.site-footer h4 { color:#fff; font-size:.85rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:.55rem; }
 /* Buttons are excluded: this rule is specificity 0,1,1 and was beating
    .btn--sage / .btn--chat (0,1,0), repainting their labels footer-grey. On
    sage that left "Check Availability" a pale pink on pale green — all but
@@ -654,7 +653,20 @@ body.no-scroll { overflow: hidden; }
 .site-footer a:not(.btn):hover { color:#fff; }
 .footer-grid { display:grid; gap:2rem; }
 @media (min-width:700px){ .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
-.footer-links { list-style:none; padding:0; margin:0; display:grid; gap:.6rem; }
+/* One spacing source, not three. This list had a 44px tap target AND .55rem
+   padding AND a .6rem gap stacking up: a step of 54px against a 14.7px face,
+   a ratio of 3.64 where a set list wants ~2. It read as scattered words
+   rather than an index. The tap target is now the whole rhythm — rows are
+   flush, evenly stepped, and still comfortably thumb-sized. */
+.footer-links { list-style:none; padding:0; margin:0; display:grid; gap:0; }
+.footer-links a {
+  display:flex; align-items:center; min-height:38px;
+  padding-block:0; line-height:1.35;
+}
+/* Kept here, immediately after the base rule, NOT up in the phone block near
+   the top: these selectors tie on specificity, so whichever is written last
+   wins. Declared earlier it was silently dead and thumbs got a 38px target. */
+@media (max-width: 700px) { .footer-links a { min-height: 44px; } }
 .social-row { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem; }
 .social-row a {
   width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.08);
