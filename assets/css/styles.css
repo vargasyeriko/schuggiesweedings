@@ -602,8 +602,13 @@ body.no-scroll { overflow: hidden; }
   .site-footer { padding-bottom: max(6.5rem, calc(env(safe-area-inset-bottom) + 6rem)); }
 }
 .site-footer h4 { color:#fff; font-size:.85rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:1rem; }
-.site-footer a { color:#cfc7c5; }
-.site-footer a:hover { color:#fff; }
+/* Buttons are excluded: this rule is specificity 0,1,1 and was beating
+   .btn--sage / .btn--chat (0,1,0), repainting their labels footer-grey. On
+   sage that left "Check Availability" a pale pink on pale green — all but
+   unreadable. :not(.btn) keeps plain footer links grey and lets every button
+   variant keep the colour its own class sets. */
+.site-footer a:not(.btn) { color:#cfc7c5; }
+.site-footer a:not(.btn):hover { color:#fff; }
 .footer-grid { display:grid; gap:2rem; }
 @media (min-width:700px){ .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
 .footer-links { list-style:none; padding:0; margin:0; display:grid; gap:.6rem; }
