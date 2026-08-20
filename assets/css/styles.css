@@ -537,9 +537,52 @@ body.no-scroll { overflow: hidden; }
    above it than between ordinary sections, and clear separation from the
    footer so the page ends on a statement rather than just stopping. */
 .section--closing { padding-block: clamp(4rem, 10vw, 6.5rem) clamp(3.5rem, 8vw, 5rem); }
-.cta-strip { background: linear-gradient(120deg, var(--burgundy), var(--burgundy-dark)); color:#fff; text-align:center; border-radius: var(--radius-lg); padding: clamp(2rem,6vw,3.4rem); box-shadow: var(--shadow-md); }
-.cta-strip h2 { color:#fff; }
-.cta-strip p { color:#f2e2e5; max-width: 52ch; margin-inline:auto; }
+/* --- ConciergeCTA (quiet-luxury plan, next-step 1) ---------------------
+   Was a filled burgundy panel with a drop shadow and centred text: the most
+   templated element on the site, and it closes all 75 pages. Restyled here
+   rather than in the markup so every page changes together.
+
+   Now it is not a box at all. A hairline opens the block, the ask sits left
+   at display size, the actions sit right. Burgundy is spent on one 40px tick
+   at the head of that rule instead of on a whole panel — the only ornament,
+   and it reads as a selvedge edge rather than decoration. */
+.cta-strip {
+  position: relative;
+  background: none; color: inherit; box-shadow: none; border-radius: 0;
+  text-align: left;
+  padding: var(--sp-xl) 0 0;
+  border-top: 1px solid var(--line);
+  display: grid; gap: var(--sp-md) var(--sp-xl); align-items: end;
+}
+.cta-strip::before {
+  content: ""; position: absolute; top: -1px; left: 0;
+  width: 40px; height: 2px; background: var(--burgundy);
+}
+/* Placed by role, not by child order: one page's strip has no h2 and two
+   paragraphs instead, so auto-placement put its buttons in the wrong cell.
+   Everything that is not the button row stacks in column one; the button row
+   holds column two for the full height. */
+@media (min-width: 860px) {
+  .cta-strip { grid-template-columns: minmax(0, 1fr) auto; }
+  .cta-strip > :not(.btn-row) { grid-column: 1; }
+  .cta-strip > .btn-row { grid-column: 2; grid-row: 1 / -1; align-self: end; }
+}
+.cta-strip h2 {
+  color: var(--ink); margin: 0;
+  font-size: clamp(1.9rem, 4.2vw, 3rem); letter-spacing: -.02em; max-width: 20ch;
+}
+.cta-strip p { color: var(--muted); max-width: 46ch; margin: 0; }
+/* The row was centred against a full-width panel; against a column it aligns
+   with the copy on phones and with the right edge on desktop. */
+.cta-strip .btn-row { margin: 0; justify-content: flex-start; }
+@media (min-width: 860px) { .cta-strip .btn-row { justify-content: flex-end; } }
+/* .btn--light is background:#fff — it only ever read because it sat on
+   burgundy. On paper it would be a white button on a white ground, so inside
+   this block it takes the outlined treatment instead. */
+.cta-strip .btn--light {
+  background: transparent; color: var(--burgundy); border-color: var(--burgundy);
+}
+.cta-strip .btn--light:hover { background: var(--burgundy); color: #fff; }
 
 /* Pills / logos */
 .pill-row { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; }

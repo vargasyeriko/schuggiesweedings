@@ -68,7 +68,14 @@ to what CSS already delivers here.
 
 ## Next steps, in priority order
 
-1. **ConciergeCTA** — convert the existing final CTA strip. Pure presentation.
+1. ~~**ConciergeCTA** — convert the existing final CTA strip.~~ **DONE 2026-08-20.**
+   Restyled `.cta-strip` itself rather than editing markup, so all 75 pages
+   changed at once. The filled burgundy panel is gone: hairline rule with a
+   40px burgundy tick, ask left at display size, actions right. Watch out —
+   `.btn--light` is `background:#fff` and only ever read because it sat on
+   burgundy; it takes an outlined treatment inside `.cta-strip` now. Children
+   are placed by role (`> :not(.btn-row)`), not order, because one strip has
+   an eyebrow and two paragraphs instead of an h2.
 2. **ImagePair** — replace one Weddings or Parties split with the asymmetric pair.
 3. **Interior pages** — apply `.luxury-section` rhythm to Weddings/Parties/About.
 4. **InquiryDrawer** — only after 1–3, and only with form handling preserved.
@@ -104,7 +111,7 @@ to what CSS already delivers here.
   Better still, check `document.styleSheets[n].cssRules.length` in the browser —
   if it is lower than expected, parsing died somewhere.
 - **Bump `?b=` on every asset edit.** Cloudflare and the browser both cache
-  hard. Currently at `?b=23`.
+  hard. Currently at `?b=45`.
 - **Source photos are 1080×1080.** Everything larger is interpolated. Real
   sharpness needs originals from the photographer; the `srcset` is already
   wired to take them as a straight file swap.
