@@ -53,7 +53,8 @@
     { label: "Prices",                  href: "pages/prices.html" },
     { label: "Weddings",                href: "pages/weddings.html" },
     { label: "Nottingham Ceilidh Club", href: "pages/public-ceilidhs.html" },
-    { label: "Free Wedding Toolkit",    href: "pages/guides.html" }
+    { label: "Free Wedding Toolkit",    href: "pages/guides.html" },
+    { label: "Recent Articles",         href: "pages/recent-articles.html" }
   ];
 
   // How deep below the site root are we? Blog posts live at
