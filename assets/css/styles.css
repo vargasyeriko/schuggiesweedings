@@ -13,6 +13,8 @@
      one-off strays that pulled the palette apart.) */
   --burgundy:        #a0263b;
   --burgundy-dark:   #702331;
+  --oxblood:         #5e1119;   /* chat fab — deep red pulled toward black */
+  --oxblood-dark:    #400b11;
   --green:           #3f6b57;   /* ceilidh green — CTA + price-guide frame */
   --green-dark:      #2f5443;
   --green-deep:      #23443b;   /* text on green-tinted panels */
@@ -770,11 +772,11 @@ body.no-scroll { overflow: hidden; }
 .cbot { position: fixed; left: 18px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 130; }
 .cbot__fab {
   width: 58px; height: 58px; border-radius: 50%; border: none; cursor: pointer;
-  background: var(--burgundy); color: #fff; box-shadow: var(--shadow-md);
+  background: var(--oxblood); color: #fff; box-shadow: var(--shadow-md);
   display: grid; place-items: center; transition: transform .2s var(--ease), background .2s;
 }
 .cbot__fab svg { width: 26px; height: 26px; }
-.cbot__fab:hover { transform: translateY(-2px); background: var(--burgundy-dark); }
+.cbot__fab:hover { transform: translateY(-2px); background: var(--oxblood-dark); }
 .cbot__panel {
   position: absolute; left: 0; bottom: 72px; width: min(92vw, 360px); height: min(72vh, 520px);
   background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
